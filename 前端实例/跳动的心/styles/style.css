@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 让容器填满屏幕，要父元素一起 */
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: pink;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.heart {
+  width: 200px;
+  height: 200px;
+  background-color: red;
+  position: relative;
+  transform: rotate(45deg);
+  animation: heartbeat 1s alternate infinite;
+  box-shadow: 0 0 30px red;
+}
+
+.heart::before {
+  content: "";
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  top: -99px;
+  left: 0;
+  background-color: red;
+  border-radius: 100px 100px 0 0;
+  box-shadow: 0 0 30px red;
+}
+
+.heart::after {
+  content: "";
+  width: 100px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  left: -99px;
+  background-color: red;
+  border-radius: 100px 0 0 100px;
+  box-shadow: 0 0 30px red;
+}
+
+/* 实现跳动效果 */
+@keyframes heartbeat {
+  0% {
+    transform: rotate(45deg) scale(0.6);
+  }
+  100% {
+    transform: rotate(45deg) scale(1.4);
+  }
+}
