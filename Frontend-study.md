@@ -1095,6 +1095,18 @@ li {
     git commit -m "注释"   # -m 后跟提交描述，"" or ''
     ```
 
+  - 配置远程仓库
+    
+    ```bash
+    git remote add origin https://github.com/yrs0512/Frontend-study.git # SSH
+    ```
+
+  - 推送到远程仓库
+
+    ```bash
+    git push -u origin master
+    ```
+
   - 查看提交记录
 
     ```bash
