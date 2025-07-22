@@ -55,9 +55,9 @@ body {
 /* 实现跳动效果 */
 @keyframes heartbeat {
   0% {
-    transform: rotate(45deg) scale(0.6);
+    transform: rotate(45deg) scale(0.8);
   }
   100% {
-    transform: rotate(45deg) scale(1.4);
+    transform: rotate(45deg) scale(1.2);
   }
 }
