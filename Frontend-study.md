@@ -1210,9 +1210,76 @@ li {
 
 3. 标识符：用来识别各种值的合法名称，最常见的标识符就是变量名，由字母、美元符号`$`、下划线`_`和数字组成，其中数字不能开头，中文是合法的标识符，但是不推荐使用
 
+4. CDN(内容分发网络 Content Delivery Network)：是一种分布式的服务器系统，用于全球范围内快速传输内容，加快页面加载速度，网络加速资源
+
 - ### _JS 语法_
 
 #### 注释：单行注释`//` 多行注释`/* */`
+
+#### 关键字：
+
+- 变量`let`
+- 常量`const`
+
+#### 数据类型：
+
+- 基本类型(原始类型)：
+
+  - 数值：`let a = 1;`
+  - 字符串：`let b = 'hello world';`(双引号或单引号)
+  - 布尔值：`let c = true;`
+  - 空值：`let d = null;`(空对象，用于初始化)
+  - 未定义：`let e;`(变量声明但未定义时返回`undefined`)
+
+- 复合类型(合成类型)：
+
+  - 对象：
+
+    ```js
+    /**
+     * 对象：
+     *     狭义对象：键值对的集合
+     *     广义对象：在JavaScript中，一切皆对象
+     */
+    let obj = {
+      name: "hello world",
+      age: 18,
+      isOk: true,
+    };
+    ```
+
+- ### _JS 语句_
+
+  - 打印(日志信息)：在浏览器中显示出来
+
+    ```js
+    console.log("hello world");
+    ```
+
+- ### _HTML 引入 JS_
+
+  - 内联脚本(嵌入到 HTML 文件中)：
+
+    ```html
+    <body>
+      <script>
+        let num = 10;
+      </script>
+    </body>
+    ```
+
+  - 外部脚本(引入本地独立 JS 文件)：
+
+    ```html
+    <!-- 可以在 head or body 引入 -->
+    <script src=""></script>
+    ```
+
+  - 引入网络来源文件：
+
+    ```html
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    ```
 
 - ### 更新中... 上次更新时间：2025-07-23
 
