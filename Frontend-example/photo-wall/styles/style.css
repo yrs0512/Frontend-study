@@ -1,0 +1,46 @@
+.wall {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: #65c2ea;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wall-inner {
+  position: relative;
+  width: 80vw;   /* 使用百分比适应屏幕 */
+  height: 80vh;
+  /* 居中显示，已由父容器flex实现，无需额外设置 */
+}
+.photo {
+  position: absolute;
+  width: 24vw;  
+  height: 18vw; 
+  max-width: 300px;   
+  max-height: 225px;  
+  border: 4px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.photo:hover {
+  transform: scale(1.1) rotate(-2deg);
+  z-index: 2;
+}
+/* 8张图片螺旋形排列，坐标基于 wall-inner 900x900 */
+.photo1 { left: 490px; top: 40px; }
+.photo2 { left: 640px; top: 130px; }
+.photo3 { left: 670px; top: 310px; }
+.photo4 { left: 580px; top: 460px; }
+.photo5 { left: 400px; top: 490px; }
+.photo6 { left: 250px; top: 400px; }
+.photo7 { left: 220px; top: 220px; }
+.photo8 { left: 310px; top: 100px; }
