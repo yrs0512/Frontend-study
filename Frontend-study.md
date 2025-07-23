@@ -47,6 +47,8 @@
 
 7. SEO：搜索引擎优化，提高网页的排名，提高用户体验
 
+8. `meta`标签：功能有：定义网页字符编码，控制视口，SEO 优化控制页面刷新或重定向等
+
 - ### _html 语法_
 
 #### 注释： `<!--  -->`
@@ -531,6 +533,34 @@ p {
 - 字体`font-family`
   如：`microsoft yahei`，可选多个，每个值用逗号隔开，加引号
 
+- 字体图标
+
+  - 概念
+    使用字体图标显示图标，解决失真问题和图片占用资源问题
+
+  - 常用字体图标库
+    [阿里字体图标库](https://www.iconfont.cn/)
+
+  - 优点
+
+    1. 轻量性：加载速度快，减少`http`请求
+    2. 灵活性：可以利用 CSS 设置大小颜色等
+    3. 兼容性：网页字体支持所有现代浏览器等
+
+  - 使用流程
+
+    1. 选择图标
+    2. 下载代码
+    3. 选择`font-class`引用(推荐)
+
+    ```css
+    <span class="iconfont icon-xxx"></span>
+    ```
+
+    ```html
+    <link rel="stylesheet" href="./css/icofont.css" />
+    ```
+
 - ### _CSS 背景属性_
 
 - 背景颜色`background-color`
@@ -769,7 +799,19 @@ li {
   ```
 
   1.  `border-radius`属性
-      设置元素圆角效果，`border-radius: 100px 100px 0 0;`，参数分别为左上，右上，右下，左下
+      设置元素圆角效果
+
+      ```css
+      .box {
+        box-radius: 100px 100px 0px 0px;
+        /*
+        四个值：左上，右上，右下，左下
+        两个值：第一个左上和右下 第二个值为右上和左下
+        一个值：四个圆角值相同
+        50% 和 100% 都能表示圆
+        */
+      }
+      ```
 
   - 外边距`margin`：清除边框外的区域，外边框是透明的
 
@@ -1046,11 +1088,133 @@ li {
     }
     ```
 
-- ### 更新中... 上次更新时间：2025-07-22
+- ### _媒体查询_
+
+  - 概念
+    使页面在不同终端设备下达到不同的效果。根据设备大小自动加载不同的样式
+
+  - 设置`meta`标签
+    使用设备的宽度作为视图宽度并禁止初始的缩放
+
+    ```html
+    <!-- 
+     width = device-width 宽度等于当前设备的宽度
+     initial-scale = 1.0 初始缩放比例(默认设置为1.0)
+     maximum-scale = 1.0 语序用户缩放到的最大比例(默认设置为1.0)
+     minimum-scale 用户是否可以手动缩放(默认设置为no)
+     -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, max-scale=1, user-scalable=no"
+    />
+    ```
+
+  - 语法
+
+    ```css
+    @media screen and (max-width: 768px) {
+      /* 设备小于768px加载样式 */
+      body {
+        background-color: red;
+      }
+    }
+    @media screen and (min-width: 768px) and (max-width: 992px) {
+      /* 设备大于768px但小于992px加载样式 */
+      body {
+        background-color: pink;
+      }
+    }
+    @media screen and (min-width: 992px) {
+      /* 设备大于992px加载样式 */
+      body {
+        background-color: green;
+      }
+    }
+    ```
+
+- ### _雪碧图_
+
+  - 概念
+    CSS Sprite 也叫 CSS 精灵图、 CSS 雪碧图，是一种网页图片应用处理方式，将一个页面涉及到的所有图片都包含到一张大图中去
+
+  - 优点
+
+    1. 减少图片的字节
+    2. 减少网页的`http`请求，从而大大的提升页面的性能
+
+  - 原理
+
+    1. 通过`background-image`引入背景图片
+    2. 通过`background-position`把背景图片移动到自己需要的位置
+
+    ```css
+    .icon1 {
+      dispaly: block;
+      width: 45px;
+      height: 70px;
+      background: url(1.png);
+      background-position: -21px -12px;
+    }
+    .icon2 {
+      dispaly: block;
+      width: 45px;
+      height: 70px;
+      background: url(1.png);
+      background-position: -308px -84px;
+    }
+    ```
+
+- ### _滑动门_
+
+  - 概念
+    创建可伸缩的导航按钮或标签页效果
+
+  - 实现
+
+    ```html
+    <div class="slide">
+      <ul>
+        <li>
+          <a href="#">手机</a>
+          <div class="slide-list">小米1</div>
+        </li>
+        <li>
+          <a href="#">平板</a>
+          <div class="slide-list">小米2</div>
+        </li>
+      </ul>
+    </div>
+    ```
+
+    ```css
+    .slide ul li:hover > .slide-list {
+      display: block;
+    }
+    ```
+
+- ### 更新中... 上次更新时间：2025-07-23
 
 ---
 
 ## <span style="color: #00aaffff">三. JS 交互</span>
+
+- ### _JS 简介_
+
+#### JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）的编程(脚本)语言，主要用于网页开发，为网页添加动态交互功能，也是一种嵌入式语言
+
+- ### _基本概念_
+
+1. 脚本语言：脚本语言是一种解释型编程语言，通常用于自动化任务、快速开发或嵌入其他程序中运行。它无需编译，直接由解释器逐行执行，具有动态类型、语法简洁、开发效率高的特点，但运行速度较慢
+
+2. JS 语句：JavaScript 程序的单位是行( line )，也就是一行一行地执行。一般情况下，每一行就是一个语句，以分号结尾(分号可选，但是一般添加)
+
+3. 标识符：用来识别各种值的合法名称，最常见的标识符就是变量名，由字母、美元符号`$`、下划线`_`和数字组成，其中数字不能开头，中文是合法的标识符，但是不推荐使用
+
+- ### _JS 语法_
+
+#### 注释：单行注释`//` 多行注释`/* */`
+
+- ### 更新中... 上次更新时间：2025-07-23
 
 ---
 
@@ -1096,7 +1260,7 @@ li {
     ```
 
   - 配置远程仓库
-    
+
     ```bash
     git remote add origin https://github.com/yrs0512/Frontend-study.git # SSH
     ```
