@@ -56,24 +56,43 @@ html 是一种超文本标记语言，用于构建和呈现 Web 页面内容
 常用标签：
 
 - 标题 `<h*></h*>`
+
 - 段落 `<p></p>`
+
 - 段落换行 `<br />`
+
 - 水平线 `<hr color="" width="" size="" align="" />`
+
 - 嵌入图像 `<img src="" alt="" width="" height="" title="" />`
+
 - 引入外部资源 `<link />`
+
 - 超链接(锚标签)
+
   - 跳转目标地址 `<a href="http://"></a>`
+
   - 跳转页内锚点 `<a href="#这里"></a>`，`<p id="这里">跳转到这里</p>`
+
   - 返回顶端 `<a href="#"></a>`
+
 - 文本
+
   - 着重文本 `<em></em>`
+
   - 粗体文本 `<b></b>`
+
   - 斜体文本 `<i></i>`
+
   - 加重语气 `<strong></strong>`
+
   - 下标文本 `<sub></sub>`
+
   - 上标文本 `<sup></sup>`
+
   - 删除字 `<del></del>`
+
   - 无特殊含义 `<span></span>`
+
 - 列表
 
   - 有序列表(type=1,a,A,i,I 等)
@@ -152,11 +171,13 @@ html 是一种超文本标记语言，用于构建和呈现 Web 页面内容
   ```
 
   - 单元格水平(列)合并 `<td colspan="2">单元格1-2</td>`
+
   - 单元格垂直(行)合并 `<td rowspan="2">单元格3-6</td>`
 
 - 表单
 
   - 表单属性 `<form action="url" method="get|post" name="myform"></form>`
+
   - 表单控件
 
   ```html
@@ -237,11 +258,17 @@ html 是一种超文本标记语言，用于构建和呈现 Web 页面内容
 - 容器`<div></div>`
 
 - H5 新语义标签
+
   - 头部`<header></header>`
+
   - 导航`<nav></nav>`
+
   - 文档中的节，比如章节、页眉、页脚`<section></section>`
+
   - 侧边栏`<aside></aside>`
+
   - 脚部`<footer></footer>`
+
   - 一个独立的、完整的内容块，如一篇博客`<article></article>`
 
 常用实体字符：
@@ -418,10 +445,15 @@ p {
 - 超链接相关
 
   - `:link`“链接”：超链接点击之前(只适用于`a`)
+
   - `:visited`“访问过的”：超链接点击之后(只适用于`a`)
+
   - `:hover`“悬停”：鼠标悬停在元素上(适用于所有标签)
+
   - `:active`“激活”：鼠标点击标签，但是不松手时(适用于所有标签)
+
     样例：
+
     ```css
     /* 在 CSS 中，这四种状态必须按照固定的顺序写(爱恨准则) */
     /* 让超链接点击之前是红色 */
@@ -1209,6 +1241,8 @@ JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）�
 
 4. CDN(内容分发网络 Content Delivery Network)：是一种分布式的服务器系统，用于全球范围内快速传输内容，加快页面加载速度，网络加速资源
 
+5. 转义：反斜杠`\`在字符串内有特殊含义，用于表示一些特殊字符，又称为转义符，如：`null`:`\0`、`\b`:退格符、`\f`:换页符、`\n`:换行符、`\r`:回车符、`\t`:制表符、`\v`:垂直制表符、`\`:反斜杠、`\'`:单引号、`\"`:双引号、`\\`:转义符
+
 - ### _JS 语法_
 
 注释：单行注释`//` 多行注释`/* */`
@@ -1223,9 +1257,13 @@ JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）�
 - 基本类型(原始类型)：
 
   - 数值：`let a = 1;`
+
   - 字符串：`let b = 'hello world';`(双引号或单引号)
+
   - 布尔值：`let c = true;`
+
   - 空值：`let d = null;`(空对象(object 类型)，用于初始化)
+
   - 未定义：`let e;`(变量声明但未定义时返回`undefined`)
 
 - 复合类型(合成类型)：
@@ -1422,7 +1460,7 @@ JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）�
 - `while`循环
 
   ```js
-  while(条件) {
+  while (条件) {
     循环体;
   }
   ```
@@ -1430,9 +1468,235 @@ JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）�
 循环控制语句
 改变循环的正常执行流程
 
-  - `break`：跳出代码块或循环
+- `break`：跳出代码块或循环
 
-  - `continue`：终止本轮循环，返回循环头部，开始下一轮循环
+- `continue`：终止本轮循环，返回循环头部，开始下一轮循环
+
+- ### _JS 字符串_
+
+字符串：`let b = 'hello world';`(双引号或单引号)
+
+- 单引号字符串内部可以使用双引号，双引号字符串内部可以使用单引号，如果想在单引号括号中使用单引号，则需要使用**转义字符`\`**
+
+- 长字符串想分行，在尾部使用反斜杠
+
+  ```js
+  var longString =
+    " Long \
+  long \
+  string";
+  ```
+
+- 字符串属性
+
+  - `length`属性
+    表示字符串的长度
+
+- 字符串常用方法
+
+  - `concat()`方法
+    用于连接两个字符串，返回一个新字符串，不改变原字符串
+
+    ```js
+    var str1 = "hello";
+    var str2 = "world";
+    console.log(str1.concat(str2)); // helloworld
+    console.log(str1 + str2); // helloworld
+    ```
+
+  - `slice()`方法
+    用于从原字符串取出子字符串并返回，不改变原字符串，第一个参数时子字符串的开始位置，第二个参数时子字符串的结束位置(不含该位置)
+
+    ```js
+    "hello world".slice(0, 5); // hello
+    ```
+
+    如果省略第二个参数，则表示到原字符串结束
+
+    ```js
+    "bilibili".slice(4); // bili
+    ```
+
+  - `substring()`方法
+    `substring()`方法与`slice()`方法类似，唯一的区别是`substring()`方法不能接受负数
+
+    ```js
+    "hello world".substring(0, 5); // hello
+    ```
+
+  - `indexOf()`方法
+    用于确定一个字符串在另一个字符串中第一次出现的位置，返回结果是匹配开始的位置，如果返回`-1`，就表示不匹配
+
+    ```js
+    "hello world".indexOf("hello"); // 0
+    "hello world".indexOf("world"); // 6
+    "hello world".indexOf("j"); // -1
+    ```
+
+  - `trim()`方法
+    用于去除字符串两端的空格，返回一个新字符串，不改变原字符串
+
+    ```js
+    " hello world ".trim(); // 'hello world'
+    ```
+
+  - `replace()`方法
+    用于替换匹配的子字符串
+
+    ```js
+    "hello world".replace("hello", "hi"); // 'hi world'
+    ```
+
+  - `split()`方法
+    按照给定的规则分割字符串，返回一个由分割出来的子字符串组成的数组
+
+    ```js
+    "hello|nice|world".split("|"); // ['hello', 'nice', 'world']
+    "hello nice world".split(" "); // ['hello', 'nice', 'world']
+    "helloworld".split(""); // ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
+    ```
+
+- ### _JS 数组_
+
+数组(array)：是按次序排列的一组值，每个值都有编号(从零开始),整个数组用方括号表示
+
+```js
+var arr = ["hello", "world"];
+
+// or
+
+var arr = [];
+arr[0] = "hello";
+arr[1] = "world";
+```
+
+- 任何类型的数据都可以放入数组
+
+```js
+var arr = [1, "hello", true, { name: "hello" }];
+```
+
+- 数组属性
+
+  - `length`属性
+    返回数组的成员数量
+
+  ```js
+  var arr = [1, 2, 3, 4, 5];
+  console.log(arr.length); // 5
+  ```
+
+- 数组遍历
+
+  - 使用`for`循环
+
+    ```js
+    var arr = [1, 2, 3, 4, 5];
+    for (var i = 0; i < arr.length; i++) {
+      console.log(arr[i]);
+    }
+    ```
+
+  - 使用`while`循环
+
+    ```js
+    var arr = [1, 2, 3, 4, 5];
+    var i = 0;
+    while (i < arr.length) {
+      console.log(arr[i]);
+      i++;
+    }
+    ```
+
+- 数组常用方法
+
+  - `isArray()`方法
+    返回一个布尔值，表示参数是否为数组
+
+    ```js
+    console.log(Array.isArray([1, 2, 3])); // true
+    ```
+
+  - `push()`方法
+    用于在数组末端添加一个或多个元素，并返回添加新元素后的数组长度，会改变原数组
+
+    ```js
+    var arr = [1, 2, 3];
+    console.log(arr.push(4, 5)); // 5
+    console.log(arr); // [1, 2, 3, 4, 5]
+    ```
+
+  - `pop()`方法
+    用于删除数组的最后一个元素，并返回该元素，会改变原数组
+
+    ```js
+    var arr = [1, 2, 3];
+    console.log(arr.pop()); // 3
+    console.log(arr); // [1, 2]
+    ```
+
+  - `join()`方法
+    以指定参数作为分隔符，将所有数组成员连接为一个字符串返回，如果不提供参数，默认用逗号分割
+
+    ```js
+    var arr = [1, 2, 3];
+    console.log(arr.join()); // 1,2,3
+    console.log(arr.join("")); // 123
+    console.log(arr.join("-")); // 1-2-3
+    console.log(arr.join(" ")); // 1 2 3
+    ```
+
+  - `concat()`方法
+    用于多个数组的合并，它将新数组的成员添加到原数组成员的后部，然后返回一个新数组，原数组不变
+
+    ```js
+    var arr1 = ["hello"];
+    var arr2 = ["world"];
+    var arr3 = ["!"];
+    arr1.concat(arr2); // ['hello', 'world']
+    arr1.concat(arr2, arr3); // ['hello', 'world', '!']
+    ```
+
+  - `slice()`方法
+    用于提取目标数组的一部分，返回一个新数组，原数组不变，第一个参数为起始位置(从 0 开始)，第二个参数为结束位置(本身不包括在内)，如果省略第二个参数，则一直返回到原数组的最后一个成员
+
+    ```js
+    var arr = [1, 2, 3, 4, 5];
+    arr.slice(0); // [1, 2, 3, 4, 5]
+    arr.slice(1, 3); // [2, 3]
+    arr.slice(); // [1, 2, 3, 4, 5]
+    ```
+
+- ### _JS 函数_
+
+函数：一段可以反复调用的代码块
+
+- 函数声明
+  function 命令声明的代码区块就是一个函数，function 命令后面是函数名，函数名后面是一对圆括号，里面是传入函数的参数，函数体放在大括号里面
+
+  ```js
+  // function 命令声明函数
+  function print(s) {
+    console.log(s);
+  }
+
+  // or
+
+  // 变量赋值的写法
+  var print = function () {
+    console.log("print");
+  };
+  ```
+
+- 函数返回值
+  JS 函数提供两个接口实现与外界的交互，其中参数作为入口，接收外界信息；返回值作为出口，把运算结果反馈给外界
+
+  ```js
+  function add(a, b) {
+    return a + b;
+    //return 后语句不会执行
+  }
+  ```
 
 - ### _HTML 引入 JS_
 
