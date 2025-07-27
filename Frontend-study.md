@@ -4,11 +4,11 @@
 
 ## <span style="color: #00aaffff">一. HTML5</span>
 
-- ### _html 概念_
+### html 概念
 
 html 是一种超文本标记语言，用于构建和呈现 Web 页面内容
 
-- ### _html 基本骨架_
+### html 基本骨架
 
 ```html
 <!-- 文档类型声明(document type缩写) -->
@@ -27,7 +27,7 @@ html 是一种超文本标记语言，用于构建和呈现 Web 页面内容
 </html>
 ```
 
-- ### _基本概念_
+### 基本概念
 
 1. 块级元素(block)：包含块，块级元素会独占一行，并垂直对齐，可以设置 width，height 属性，常见的有：`div`,`form`,`h1~h6`,`hr`,`p`,`table`,`ul`等
 
@@ -49,7 +49,7 @@ html 是一种超文本标记语言，用于构建和呈现 Web 页面内容
 
 8. `meta`标签：功能有：定义网页字符编码，控制视口，SEO 优化控制页面刷新或重定向等
 
-- ### _html 语法_
+### html 语法
 
 注释： `<!--  -->`
 
@@ -285,17 +285,17 @@ html 是一种超文本标记语言，用于构建和呈现 Web 页面内容
 |   `®`    |    注册商标     | `&reg;`  | `&#174;` |
 |   `¥`    |     元(yen)     | `&yen;`  | `&#165;` |
 
-- ### 更新中... 上次更新时间：2025-07-19
+### 更新中... 上次更新时间：2025-07-19
 
 ---
 
 ## <span style="color: #00aaffff">二. CSS3</span>
 
-- ### _CSS 概念_
+### CSS 概念
 
 CSS 称为层叠样式表，又叫级联样式表，用于描述网页的外观和格式
 
-- ### _CSS 语法_
+### CSS 语法
 
 注释：`/*  */`
 
@@ -311,7 +311,7 @@ h1 {
 }
 ```
 
-- ### _基本概念_
+### 基本概念
 
 1. `@import`：导入其他的 CSS 文件，提供加载样式的方式，只用于加载 CSS
 
@@ -319,56 +319,56 @@ h1 {
 
 3. 文档流(标准流)：网页中按照默认规则排列和布局的方式
 
-- ### _CSS 的引入方式_
+### CSS 的引入方式
 
-  - 内联样式(行内样式)
+- 内联样式(行内样式)
 
-  ```html
-  <!-- 缺乏整体性和规划性，不利于维护 -->
-  <p style="color: blue;">CSS</p>
-  ```
+```html
+<!-- 缺乏整体性和规划性，不利于维护 -->
+<p style="color: blue;">CSS</p>
+```
 
-  - 内部样式
+- 内部样式
 
-  ```html
-  <!-- 单个页面具有统一性和规划性，但在多个页面容易混乱 -->
-  <style>
-    h1 {
-      color: blue;
-      font-size: 30px;
-    }
-  </style>
-  ```
-
-  - 外部样式(**推荐**)
-
-  ```html
-  <link rel="stylesheet" href="css/style.css" />
-  ```
-
-  - 导入式
-
-  ```css
-  /* 影响加载速度 */
-  @import url("style.css");
-  p {
+```html
+<!-- 单个页面具有统一性和规划性，但在多个页面容易混乱 -->
+<style>
+  h1 {
     color: blue;
+    font-size: 30px;
   }
-  ```
+</style>
+```
 
-- ### _CSS 样式特征_
+- 外部样式(**推荐**)
 
-  - 继承性
-    被包含在内部的标签可以拥有外部标签的样式
+```html
+<link rel="stylesheet" href="css/style.css" />
+```
 
-  - 层叠性
-    同一个元素被多个选择器选中并设置了相同的属性时，浏览器会根据一定的“层叠规则”决定最终应用哪一个样式。后写的样式会覆盖前面的，权重高的会覆盖权重低的。
+- 导入式
 
-  - 优先级
-    样式定义冲突时，浏览器会根据选择器的“权重”来决定哪个样式生效
-    优先级从高到低：行内样式(内联样式) > ID 选择器 > 类选择器 > 元素选择器 > 通配选择器
+```css
+/* 影响加载速度 */
+@import url("style.css");
+p {
+  color: blue;
+}
+```
 
-- ### _CSS 基础选择器_
+### CSS 样式特征
+
+- 继承性
+  被包含在内部的标签可以拥有外部标签的样式
+
+- 层叠性
+  同一个元素被多个选择器选中并设置了相同的属性时，浏览器会根据一定的“层叠规则”决定最终应用哪一个样式。后写的样式会覆盖前面的，权重高的会覆盖权重低的。
+
+- 优先级
+  样式定义冲突时，浏览器会根据选择器的“权重”来决定哪个样式生效
+  优先级从高到低：行内样式(内联样式) > ID 选择器 > 类选择器 > 元素选择器 > 通配选择器
+
+### CSS 基础选择器
 
 1. 全局选择器
    选择所有元素
@@ -426,7 +426,7 @@ p {
 <h1 class="box2">这是box2</h1>
 ```
 
-- ### _CSS 关系选择器_
+### CSS 关系选择器
 
 - 后代选择器`E F {}`
   选择所有被 E 元素包含的 F 元素，中间用空格隔开
@@ -440,7 +440,7 @@ p {
 - 通用兄弟选择器`E~F {}`
   选择 E 元素之后的所有兄弟元素 F，作用于多个元素，用`~`隔开
 
-- ### _CSS 伪类选择器_
+### CSS 伪类选择器
 
 - 超链接相关
 
@@ -510,7 +510,7 @@ ul li:nth-child(odd) {
 }
 ```
 
-- ### _CSS 伪对象选择器_
+### CSS 伪对象选择器
 
 - `::before`选择器
   在元素内容之前插入内容
@@ -530,7 +530,7 @@ ul li:nth-child(odd) {
   }
   ```
 
-- ### _CSS 字体属性_
+### CSS 字体属性
 
 - 字体颜色`color`
 
@@ -590,7 +590,7 @@ p {
     <link rel="stylesheet" href="./css/icofont.css" />
     ```
 
-- ### _CSS 背景属性_
+### CSS 背景属性
 
 - 背景颜色`background-color`
 
@@ -646,7 +646,7 @@ p {
 }
 ```
 
-- ### _CSS 文本属性_
+### CSS 文本属性
 
 - 指定元素文本的水平对齐方式`text-align`
 
@@ -694,7 +694,7 @@ p {
 | :------: | :------------------: |
 | `number` | 设置数字，如：`50px` |
 
-- ### _CSS 元素属性_
+### CSS 元素属性
 
 - 处理元素的超出内容`overflow`
 
@@ -744,7 +744,7 @@ p {
     }
     ```
 
-- ### _CSS 列表属性_
+### CSS 列表属性
 
 - 设置列表项标记的类型`list-style-type`
 
@@ -780,7 +780,7 @@ li {
 }
 ```
 
-- ### _CSS 盒子模型_
+### CSS 盒子模型
 
 - 包含外边距`margin`、边框`border`、内边距`padding`和实际内容`content`
 
@@ -857,381 +857,381 @@ li {
   }
   ```
 
-- ### _CSS 弹性盒子_
+### CSS 弹性盒子
 
-  - 概念
-    CSS3 弹性盒是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式，由弹性容器和弹性子元素组成
+- 概念
+  CSS3 弹性盒是一种当页面需要适应不同的屏幕大小以及设备类型时确保元素拥有恰当的行为的布局方式，由弹性容器和弹性子元素组成
 
-  - 父元素属性
+- 父元素属性
 
-    1. `display`属性
-       开启弹性盒`display: flex;`，子元素默认水平排列
+  1. `display`属性
+     开启弹性盒`display: flex;`，子元素默认水平排列
 
-    2. `flex-direction`属性
-       指定弹性子元素在父容器中的位置
+  2. `flex-direction`属性
+     指定弹性子元素在父容器中的位置
 
-       |       值       |               描述               |
-       | :------------: | :------------------------------: |
-       |      row       | 横向从左到右排列(左对齐)，默认值 |
-       |  row-reverse   |     横向从右到左排列(右对齐)     |
-       |     column     |     纵向从上到下排列(上对齐)     |
-       | column-reverse |     纵向从下到上排列(下对齐)     |
+     |       值       |               描述               |
+     | :------------: | :------------------------------: |
+     |      row       | 横向从左到右排列(左对齐)，默认值 |
+     |  row-reverse   |     横向从右到左排列(右对齐)     |
+     |     column     |     纵向从上到下排列(上对齐)     |
+     | column-reverse |     纵向从下到上排列(下对齐)     |
 
-    3. `justify-content`属性
-       内容对齐属性应用在弹性容器上，把弹性项沿着弹性容器的主轴线对齐(水平)
+  3. `justify-content`属性
+     内容对齐属性应用在弹性容器上，把弹性项沿着弹性容器的主轴线对齐(水平)
 
-       |      值       |                       描述                       |
-       | :-----------: | :----------------------------------------------: |
-       |  flex-start   |         弹性项目向行头紧挨着填充(左对齐)         |
-       |   flex-end    |         弹性项目向行尾紧挨着填充(右对齐)         |
-       |    center     |         弹性项目居中紧挨着填充(水平居中)         |
-       | space-between |             弹性项目平均分布在该行上             |
-       | space-around  | 弹性项目平均分配在该行上，两边留有一半的间隔空间 |
+     |      值       |                       描述                       |
+     | :-----------: | :----------------------------------------------: |
+     |  flex-start   |         弹性项目向行头紧挨着填充(左对齐)         |
+     |   flex-end    |         弹性项目向行尾紧挨着填充(右对齐)         |
+     |    center     |         弹性项目居中紧挨着填充(水平居中)         |
+     | space-between |             弹性项目平均分布在该行上             |
+     | space-around  | 弹性项目平均分配在该行上，两边留有一半的间隔空间 |
 
-    4. `align-items`属性
-       设置或检索弹性盒子元素在侧轴(纵轴)方向上的对齐方式(垂直)
+  4. `align-items`属性
+     设置或检索弹性盒子元素在侧轴(纵轴)方向上的对齐方式(垂直)
 
-       |     值     |                   描述                   |
-       | :--------: | :--------------------------------------: |
-       | flex-start | 元素纵轴起始位置紧靠侧轴起始边界(上对齐) |
-       |  flex-end  | 元素纵轴结束位置紧靠侧轴结束边界(下对齐) |
-       |   center   |        元素纵轴居中对齐(垂直居中)        |
+     |     值     |                   描述                   |
+     | :--------: | :--------------------------------------: |
+     | flex-start | 元素纵轴起始位置紧靠侧轴起始边界(上对齐) |
+     |  flex-end  | 元素纵轴结束位置紧靠侧轴结束边界(下对齐) |
+     |   center   |        元素纵轴居中对齐(垂直居中)        |
 
-  - 子元素属性
+- 子元素属性
 
-    1. `flex-grow`属性
-       根据弹性盒子元素所设的扩展因子作为比例来分配剩余空间，默认为 0，即不放大
-       分配**剩余空间**，0.1 即 10%，1 即 100%，超出按 100%
+  1. `flex-grow`属性
+     根据弹性盒子元素所设的扩展因子作为比例来分配剩余空间，默认为 0，即不放大
+     分配**剩余空间**，0.1 即 10%，1 即 100%，超出按 100%
 
-    2. `flex`属性
-       分配**容器空间**，按比例分配，可以忽视子元素的`width`和`height`
+  2. `flex`属性
+     分配**容器空间**，按比例分配，可以忽视子元素的`width`和`height`
 
-- ### _脱离文档流_
+### 脱离文档流
 
-  - 浮动`float`
-    定义在哪个方向浮动，任何元素都可以浮动，只能**左右浮动**，不能上下浮动，相当于在页面上面增加一个浮层放置内容
+- 浮动`float`
+  定义在哪个方向浮动，任何元素都可以浮动，只能**左右浮动**，不能上下浮动，相当于在页面上面增加一个浮层放置内容
 
-    |  值   |     描述     |
-    | :---: | :----------: |
-    | left  | 元素向左浮动 |
-    | right | 元素向右浮动 |
+  |  值   |     描述     |
+  | :---: | :----------: |
+  | left  | 元素向左浮动 |
+  | right | 元素向右浮动 |
 
-    所有元素同时浮动时，会变成水平摆放，当容器不足时，会在下一行摆放
-    浮动的**副作用**：
+  所有元素同时浮动时，会变成水平摆放，当容器不足时，会在下一行摆放
+  浮动的**副作用**：
 
-    1. 浮动元素会造成父元素高度塌陷
-    2. 后续元素会受到影响
+  1. 浮动元素会造成父元素高度塌陷
+  2. 后续元素会受到影响
 
-  - 清除浮动(的副作用)
+- 清除浮动(的副作用)
 
-    - 浮动元素会造成父元素高度塌陷
-      解决方案：
+  - 浮动元素会造成父元素高度塌陷
+    解决方案：
 
-      1. 父元素设置高度
-
-         ```css
-         .container {
-           height: 100px;
-         }
-         ```
-
-      2. 受影响的元素增加`clear`属性
-         如果同级元素受到影响，直接给受到影响的元素增加`clear`属性
-
-         |   值    |       描述       |
-         | :-----: | :--------------: |
-         | `left`  |    清除左浮动    |
-         | `right` |    清除右浮动    |
-         | `both`  | 同时清除左右浮动 |
-
-      3. `overflow`清除浮动
-         如果由父级塌陷，并且同级元素也受到了影响，可以使用`overflow`清除浮动
-
-         ```css
-         .container {
-           height: 100px;
-           /* 清除浮动 */
-           overflow: hidden;
-           clear: both;
-         }
-         ```
-
-      4. 伪对象的方式
-         如果由父级塌陷，并且同级元素也受到了影响，还可以使用伪对象方式处理
-
-         ```css
-         .container::after {
-           /* 为父标签添加伪类after，设置空的内容，并且使用clear: both; */
-           content: "";
-           display: block;
-           clear: both;
-         }
-         ```
-
-  - 定位`position`
-
-    |     值     |   描述   |
-    | :--------: | :------: |
-    | `relative` | 相对定位 |
-    | `absolute` | 绝对定位 |
-    |  `fixed`   | 固定定位 |
-
-    绝对定位和相对定位会**脱离文档流**，使用`left`、`top`、`right`、`bottom`属性来设置位置
-
-    1. 相对定位
-
-       ```css
-       .box {
-         width: 200px;
-         height: 200px;
-         /* 
-         相对定位：不会脱离文档流，相对于父级元素进行定位，父级元素没有限制 
-         */
-         position: relative;
-         top: 100px;
-       }
-       ```
-
-    2. 绝对定位
+    1. 父元素设置高度
 
        ```css
        .container {
-         width: 500px;
-         height: 500px;
-         background-color: red;
-         position: relative;
-         top: 100px;
-         left: 100px;
-       }
-
-       .box {
-         width: 200px;
-         height: 200px;
-         /* 
-         绝对定位：相对于父级元素进行定位，父级元素必须存在定位，如果不存在，
-                  则向上逐级寻找具有定位的元素，如果都没有，则相对于浏览器定位
-         */
-         position: absolute;
-         top: 100px;
+         height: 100px;
        }
        ```
 
-    3. 固定定位
+    2. 受影响的元素增加`clear`属性
+       如果同级元素受到影响，直接给受到影响的元素增加`clear`属性
+
+       |   值    |       描述       |
+       | :-----: | :--------------: |
+       | `left`  |    清除左浮动    |
+       | `right` |    清除右浮动    |
+       | `both`  | 同时清除左右浮动 |
+
+    3. `overflow`清除浮动
+       如果由父级塌陷，并且同级元素也受到了影响，可以使用`overflow`清除浮动
 
        ```css
-       .box {
-         width: 200px;
-         height: 200px;
-         /* 
-         固定定位：永远相对于浏览器窗口，页面滚动时不会移动
-         */
-         position: fixed;
-         top: 100px;
+       .container {
+         height: 100px;
+         /* 清除浮动 */
+         overflow: hidden;
+         clear: both;
        }
        ```
 
-    `z-index`属性
-    设置元素的堆叠顺序，拥有更高堆叠顺序的元素会覆盖拥有较低堆叠顺序的元素，常与定位结合使用
+    4. 伪对象的方式
+       如果由父级塌陷，并且同级元素也受到了影响，还可以使用伪对象方式处理
 
-    ```css
-    /* z-index 值越大，越上层，一般不超过1000 */
-    .box1 {
-      width: 200px;
-      height: 200px;
+       ```css
+       .container::after {
+         /* 为父标签添加伪类after，设置空的内容，并且使用clear: both; */
+         content: "";
+         display: block;
+         clear: both;
+       }
+       ```
+
+- 定位`position`
+
+  |     值     |   描述   |
+  | :--------: | :------: |
+  | `relative` | 相对定位 |
+  | `absolute` | 绝对定位 |
+  |  `fixed`   | 固定定位 |
+
+  绝对定位和相对定位会**脱离文档流**，使用`left`、`top`、`right`、`bottom`属性来设置位置
+
+  1. 相对定位
+
+     ```css
+     .box {
+       width: 200px;
+       height: 200px;
+       /* 
+       相对定位：不会脱离文档流，相对于父级元素进行定位，父级元素没有限制 
+       */
+       position: relative;
+       top: 100px;
+     }
+     ```
+
+  2. 绝对定位
+
+     ```css
+     .container {
+       width: 500px;
+       height: 500px;
+       background-color: red;
+       position: relative;
+       top: 100px;
+       left: 100px;
+     }
+
+     .box {
+       width: 200px;
+       height: 200px;
+       /* 
+       绝对定位：相对于父级元素进行定位，父级元素必须存在定位，如果不存在，
+                则向上逐级寻找具有定位的元素，如果都没有，则相对于浏览器定位
+       */
+       position: absolute;
+       top: 100px;
+     }
+     ```
+
+  3. 固定定位
+
+     ```css
+     .box {
+       width: 200px;
+       height: 200px;
+       /* 
+       固定定位：永远相对于浏览器窗口，页面滚动时不会移动
+       */
+       position: fixed;
+       top: 100px;
+     }
+     ```
+
+  `z-index`属性
+  设置元素的堆叠顺序，拥有更高堆叠顺序的元素会覆盖拥有较低堆叠顺序的元素，常与定位结合使用
+
+  ```css
+  /* z-index 值越大，越上层，一般不超过1000 */
+  .box1 {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    position: fixed;
+    top: 100px;
+    left: 50px;
+    z-index: 1;
+  }
+  .box2 {
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    position: fixed;
+    top: 200px;
+    left: 100px;
+    z-index: 2;
+  }
+  ```
+
+### CSS 动画
+
+- 创建动画`@keyframes`
+  定义动画在不同时间点的样式状态，从而实现复杂的动画效果
+
+  ```css
+  @keyframes name {
+    0% {
+      /* 起始状态样式 */
+    }
+    50% {
+      /* 中间状态样式 */
+    }
+    100% {
+      /* 结束状态样式 */
+    }
+    /* or */
+    from {
+      /* 起始状态样式 */
+    }
+    to {
+      /* 结束状态样式 */
+    }
+  }
+  ```
+
+- 使用动画`animation`
+  实现元素动画效果
+
+  ```css
+  element {
+    /* 要应用的 @keyframes 动画名称 */
+    animation-name: name;
+    /* 完成一个周期的时间 */
+    animation-duration: 3s;
+    /* 
+    动画速度曲线，ease(默认，慢-快-慢)，linear(匀速)，ease-in(慢-快，慢开始)，ease-out(快-慢，慢结束)，ease-in-out(慢-快-慢，慢开始-慢结束)，cubic-bezier(0.1, 0.7, 1.0, 0.1)(自定义速度曲线)
+    */
+    animation-timing-function: ease;
+    /* 动画开始前的延迟时间 */
+    animation-delay: time;
+    /* 
+    动画播放次数，数字(3，播放3次)，infinite(无限循环)
+    */
+    animation-iteration-count: infinite;
+    /* 
+    动画是否反向播放，normal(默认，正常播放)，reverse(反向播放)，alternate(奇数次正常播放，偶数次反向播放)，alternate-reverse(奇数次反向播放，偶数次正常播放)
+    */
+    animation-direction: alternate;
+    /* 
+    动画执行前后如何应用样式，none(默认，不应用样式)，forwards(动画结束，应用最后一帧样式)，backwards(动画开始，应用第一帧样式)，both(动画开始和结束，应用第一帧和最后一帧样式)
+    */
+    animation-fill-mode: forwards;
+    /* 
+    控制动画的播放状态，running(默认，播放)，paused(暂停)
+    */
+    animation-play-state: running;
+    /*简写形式 */
+    animation: slideIn 1.5s ease-out 0.5s 1 normal forwards;
+  }
+  ```
+
+### 媒体查询
+
+- 概念
+  使页面在不同终端设备下达到不同的效果。根据设备大小自动加载不同的样式
+
+- 设置`meta`标签
+  使用设备的宽度作为视图宽度并禁止初始的缩放
+
+  ```html
+  <!-- 
+   width = device-width 宽度等于当前设备的宽度
+   initial-scale = 1.0 初始缩放比例(默认设置为1.0)
+   maximum-scale = 1.0 语序用户缩放到的最大比例(默认设置为1.0)
+   minimum-scale 用户是否可以手动缩放(默认设置为no)
+   -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, max-scale=1, user-scalable=no"
+  />
+  ```
+
+- 语法
+
+  ```css
+  @media screen and (max-width: 768px) {
+    /* 设备小于768px加载样式 */
+    body {
       background-color: red;
-      position: fixed;
-      top: 100px;
-      left: 50px;
-      z-index: 1;
     }
-    .box2 {
-      width: 200px;
-      height: 200px;
-      background-color: blue;
-      position: fixed;
-      top: 200px;
-      left: 100px;
-      z-index: 2;
+  }
+  @media screen and (min-width: 768px) and (max-width: 992px) {
+    /* 设备大于768px但小于992px加载样式 */
+    body {
+      background-color: pink;
     }
-    ```
-
-- ### _CSS 动画_
-
-  - 创建动画`@keyframes`
-    定义动画在不同时间点的样式状态，从而实现复杂的动画效果
-
-    ```css
-    @keyframes name {
-      0% {
-        /* 起始状态样式 */
-      }
-      50% {
-        /* 中间状态样式 */
-      }
-      100% {
-        /* 结束状态样式 */
-      }
-      /* or */
-      from {
-        /* 起始状态样式 */
-      }
-      to {
-        /* 结束状态样式 */
-      }
+  }
+  @media screen and (min-width: 992px) {
+    /* 设备大于992px加载样式 */
+    body {
+      background-color: green;
     }
-    ```
+  }
+  ```
 
-  - 使用动画`animation`
-    实现元素动画效果
+### 雪碧图
 
-    ```css
-    element {
-      /* 要应用的 @keyframes 动画名称 */
-      animation-name: name;
-      /* 完成一个周期的时间 */
-      animation-duration: 3s;
-      /* 
-      动画速度曲线，ease(默认，慢-快-慢)，linear(匀速)，ease-in(慢-快，慢开始)，ease-out(快-慢，慢结束)，ease-in-out(慢-快-慢，慢开始-慢结束)，cubic-bezier(0.1, 0.7, 1.0, 0.1)(自定义速度曲线)
-      */
-      animation-timing-function: ease;
-      /* 动画开始前的延迟时间 */
-      animation-delay: time;
-      /* 
-      动画播放次数，数字(3，播放3次)，infinite(无限循环)
-      */
-      animation-iteration-count: infinite;
-      /* 
-      动画是否反向播放，normal(默认，正常播放)，reverse(反向播放)，alternate(奇数次正常播放，偶数次反向播放)，alternate-reverse(奇数次反向播放，偶数次正常播放)
-      */
-      animation-direction: alternate;
-      /* 
-      动画执行前后如何应用样式，none(默认，不应用样式)，forwards(动画结束，应用最后一帧样式)，backwards(动画开始，应用第一帧样式)，both(动画开始和结束，应用第一帧和最后一帧样式)
-      */
-      animation-fill-mode: forwards;
-      /* 
-      控制动画的播放状态，running(默认，播放)，paused(暂停)
-      */
-      animation-play-state: running;
-      /*简写形式 */
-      animation: slideIn 1.5s ease-out 0.5s 1 normal forwards;
-    }
-    ```
+- 概念
+  CSS Sprite 也叫 CSS 精灵图、 CSS 雪碧图，是一种网页图片应用处理方式，将一个页面涉及到的所有图片都包含到一张大图中去
 
-- ### _媒体查询_
+- 优点
 
-  - 概念
-    使页面在不同终端设备下达到不同的效果。根据设备大小自动加载不同的样式
+  1. 减少图片的字节
+  2. 减少网页的`http`请求，从而大大的提升页面的性能
 
-  - 设置`meta`标签
-    使用设备的宽度作为视图宽度并禁止初始的缩放
+- 原理
 
-    ```html
-    <!-- 
-     width = device-width 宽度等于当前设备的宽度
-     initial-scale = 1.0 初始缩放比例(默认设置为1.0)
-     maximum-scale = 1.0 语序用户缩放到的最大比例(默认设置为1.0)
-     minimum-scale 用户是否可以手动缩放(默认设置为no)
-     -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, max-scale=1, user-scalable=no"
-    />
-    ```
+  1. 通过`background-image`引入背景图片
+  2. 通过`background-position`把背景图片移动到自己需要的位置
 
-  - 语法
+  ```css
+  .icon1 {
+    dispaly: block;
+    width: 45px;
+    height: 70px;
+    background: url(1.png);
+    background-position: -21px -12px;
+  }
+  .icon2 {
+    dispaly: block;
+    width: 45px;
+    height: 70px;
+    background: url(1.png);
+    background-position: -308px -84px;
+  }
+  ```
 
-    ```css
-    @media screen and (max-width: 768px) {
-      /* 设备小于768px加载样式 */
-      body {
-        background-color: red;
-      }
-    }
-    @media screen and (min-width: 768px) and (max-width: 992px) {
-      /* 设备大于768px但小于992px加载样式 */
-      body {
-        background-color: pink;
-      }
-    }
-    @media screen and (min-width: 992px) {
-      /* 设备大于992px加载样式 */
-      body {
-        background-color: green;
-      }
-    }
-    ```
+### 滑动门
 
-- ### _雪碧图_
+- 概念
+  创建可伸缩的导航按钮或标签页效果
 
-  - 概念
-    CSS Sprite 也叫 CSS 精灵图、 CSS 雪碧图，是一种网页图片应用处理方式，将一个页面涉及到的所有图片都包含到一张大图中去
+- 实现
 
-  - 优点
+  ```html
+  <div class="slide">
+    <ul>
+      <li>
+        <a href="#">手机</a>
+        <div class="slide-list">小米1</div>
+      </li>
+      <li>
+        <a href="#">平板</a>
+        <div class="slide-list">小米2</div>
+      </li>
+    </ul>
+  </div>
+  ```
 
-    1. 减少图片的字节
-    2. 减少网页的`http`请求，从而大大的提升页面的性能
+  ```css
+  .slide ul li:hover > .slide-list {
+    display: block;
+  }
+  ```
 
-  - 原理
-
-    1. 通过`background-image`引入背景图片
-    2. 通过`background-position`把背景图片移动到自己需要的位置
-
-    ```css
-    .icon1 {
-      dispaly: block;
-      width: 45px;
-      height: 70px;
-      background: url(1.png);
-      background-position: -21px -12px;
-    }
-    .icon2 {
-      dispaly: block;
-      width: 45px;
-      height: 70px;
-      background: url(1.png);
-      background-position: -308px -84px;
-    }
-    ```
-
-- ### _滑动门_
-
-  - 概念
-    创建可伸缩的导航按钮或标签页效果
-
-  - 实现
-
-    ```html
-    <div class="slide">
-      <ul>
-        <li>
-          <a href="#">手机</a>
-          <div class="slide-list">小米1</div>
-        </li>
-        <li>
-          <a href="#">平板</a>
-          <div class="slide-list">小米2</div>
-        </li>
-      </ul>
-    </div>
-    ```
-
-    ```css
-    .slide ul li:hover > .slide-list {
-      display: block;
-    }
-    ```
-
-- ### 更新中... 上次更新时间：2025-07-23
+### 更新中... 上次更新时间：2025-07-23
 
 ---
 
 ## <span style="color: #00aaffff">三. JS 交互</span>
 
-- ### _JS 简介_
+### JS 简介
 
 JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）的编程(脚本)语言，主要用于网页开发，为网页添加动态交互功能，也是一种嵌入式语言
 
-- ### _基本概念_
+### 基本概念
 
 1. 脚本语言：脚本语言是一种解释型编程语言，通常用于自动化任务、快速开发或嵌入其他程序中运行。它无需编译，直接由解释器逐行执行，具有动态类型、语法简洁、开发效率高的特点，但运行速度较慢
 
@@ -1243,7 +1243,7 @@ JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）�
 
 5. 转义：反斜杠`\`在字符串内有特殊含义，用于表示一些特殊字符，又称为转义符，如：`null`:`\0`、`\b`:退格符、`\f`:换页符、`\n`:换行符、`\r`:回车符、`\t`:制表符、`\v`:垂直制表符、`\`:反斜杠、`\'`:单引号、`\"`:双引号、`\\`:转义符
 
-- ### _JS 语法_
+### JS 语法
 
 注释：单行注释`//` 多行注释`/* */`
 
@@ -1393,7 +1393,7 @@ JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）�
      将任意类型的值转换为布尔值，除了以下五个转换结果为`false`，其他值全部为`true`
      `undefined`、`null`、`0`、`"" or ''`、`NaN`
 
-- ### _JS 语句_
+### JS 语句
 
 打印(日志信息)：在浏览器中显示出来
 
@@ -1472,9 +1472,10 @@ JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）�
 
 - `continue`：终止本轮循环，返回循环头部，开始下一轮循环
 
-- ### _JS 字符串_
+### JS 字符串
 
-字符串：`let b = 'hello world';`(双引号或单引号)
+- 概念
+  字符串：`let b = 'hello world';`(双引号或单引号)
 
 - 单引号字符串内部可以使用双引号，双引号字符串内部可以使用单引号，如果想在单引号括号中使用单引号，则需要使用**转义字符`\`**
 
@@ -1556,9 +1557,10 @@ JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）�
     "helloworld".split(""); // ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
     ```
 
-- ### _JS 数组_
+### JS 数组
 
-数组(array)：是按次序排列的一组值，每个值都有编号(从零开始),整个数组用方括号表示
+- 概念
+  数组(array)：是按次序排列的一组值，每个值都有编号(从零开始),整个数组用方括号表示
 
 ```js
 var arr = ["hello", "world"];
@@ -1667,9 +1669,10 @@ var arr = [1, "hello", true, { name: "hello" }];
     arr.slice(); // [1, 2, 3, 4, 5]
     ```
 
-- ### _JS 函数_
+### JS 函数
 
-函数：一段可以反复调用的代码块
+- 概念
+  函数：一段可以反复调用的代码块
 
 - 函数声明
   function 命令声明的代码区块就是一个函数，function 命令后面是函数名，函数名后面是一对圆括号，里面是传入函数的参数，函数体放在大括号里面
@@ -1698,32 +1701,567 @@ var arr = [1, "hello", true, { name: "hello" }];
   }
   ```
 
-- ### _HTML 引入 JS_
+### HTML 引入 JS
 
-  - 内联脚本(嵌入到 HTML 文件中)：
+- 内联脚本(嵌入到 HTML 文件中)：
 
-    ```html
-    <body>
-      <script>
-        let num = 10;
-      </script>
-    </body>
+  ```html
+  <body>
+    <script>
+      let num = 10;
+    </script>
+  </body>
+  ```
+
+- 外部脚本(引入本地独立 JS 文件)：
+
+  ```html
+  <!-- 可以在 head or body 引入 -->
+  <script src=""></script>
+  ```
+
+- 引入网络来源文件：
+
+  ```html
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  ```
+
+### DOM
+
+- 概念
+  DOM(Document Object Model)：文档对象模型，是 HTML 和 XML 文档的编程接口，JS 操作网页的接口，它将网页转为一个 JS 对象，从而可以用脚本进行各种操作
+
+- DOM 节点
+
+  - 概念
+    DOM 节点(node)：DOM 的最小组成单位叫做节点，网页中的所有元素都是节点，节点可以是元素节点、属性节点、文本节点、注释节点、文档节点、文档类型节点，文档的树形结构(DOM 树)解释由各种不同类型的节点组成
+
+  - 节点的类型
+
+    - Document：整个文档树的顶层节点
+
+    - DocumentType：doctype 标签
+
+    - Element：网页的各种 HTML 标签
+
+    - Attribute：网页元素的属性(比如`class="right"`)
+
+    - Text：标签之间或标签包含的文本
+
+    - Comment：注释
+
+    - DocumentFragment：文档片段
+
+  - document 对象
+
+    - 概念
+      document 对象是文档的根节点，每张网页都有自己的 document 对象，只要浏览器开始载入 HTML 文档，该对象就存在，可以直接使用
+
+    - 方法(获取元素)
+
+      - `createElement()`
+        创建一个元素节点
+
+        ```js
+        var div = document.createElement("div");
+        ```
+
+      - `getElementsByTagName()`
+        搜索 HTML 标签名，返回符合条件的元素，他的返回值是一个类似数组对象(HTMLCollection 实例)，可以实时反映 HTML 文档的变化，如果没有任何匹配的元素，则返回空集
+
+        ```js
+        // 所有 <p></p>
+        var paras = document.getElementsByTagName("p");
+        // innerHTML:给元素添加内容
+        paras[0].innerHTML = "Hello World!";
+        ```
+
+      - `getElementsByClassName()`
+        返回一个类似数组的对象(HTMLCollection 实例)，包括了所有`class`名字符合指定条件的元素，元素的变化实时反映在返回结果中
+
+        ```js
+        // 类为 <div class="names"></div>
+        var paras = document.getElementsByClassName("names");
+        ```
+
+      - `getElementById()`
+        用于选择拥有`name`属性的 HTML 元素(`<form>`、`<radio>`、`<img>`等)，返回一个类似于数组的对象(NodeList 实例)，因为`name`属性相同的元素可能不止一个
+
+        ```js
+        // 表单为 <form name="it"></form>
+        var forms = document.getElementsByName("it");
+        ```
+
+      - `getElementById()`
+        返回匹配指定`id`属性的元素节点，如果没有发现匹配的节点，则返回`null`
+
+        ```js
+        // id 唯一 <h1 id="myElement"></h1>
+        var element = document.getElementById("myElement");
+        ```
+
+      - `querySelector()`
+        接受一个 CSS 选择器作为参数，返回匹配该选择器的元素节点，如果有多个节点满足匹配条件，则返回第一个匹配的节点，如果没有发现匹配的节点，则返回`null`
+
+        ```js
+        /**
+         *  在 CSS 中，匹配 class (.)，匹配 id (#)
+         */
+        var element = document.querySelector("#myElement");
+        ```
+
+      - `querySelectorAll()`
+        与`querySelector()`类似，区别是返回一个 NodeList 对象，包含所有匹配给定的选择器的节点
+
+        ```js
+        var elements = document.querySelectorAll(".myClass");
+        ```
+
+  - Element 对象
+
+    - 概念
+      对应网页的 HTML 元素，每一个 HTML 元素，在 DOM 树上都会转化成一个 Element 节点对象
+
+    - 属性
+
+      - Element.id
+        返回指定元素的`id`属性，该属性可读写
+
+        ```js
+        <p id="foo"></p>;
+        var p = document.querySelector("p");
+        console.log(p.id); // foo
+        p.id = "bar";
+        console.log(p.id); // bar
+        ```
+
+      - Element.className
+        用来读写当前元素节点的`class`属性，它的值是一个字符串，每个`class`之间用空格分隔
+
+        ```js
+        <div class="one two three"></div>;
+        var div = document.querySelector("div");
+        console.log(div.className); // one two three
+        div.className = "four five";
+        console.log(div.className); // four five
+        ```
+
+      - Element.classList
+        `add()`：增加一个`class`
+
+        ```js
+        <div class="one two three"></div>;
+        var div = document.querySelector("div");
+        console.log(div.className); // one two three
+        div.classList.add("four");
+        console.log(div.className); // one two three four
+        ```
+
+        `remove()`：删除一个`class`
+
+        ```js
+        <div class="one two three"></div>;
+        var div = document.querySelector("div");
+        console.log(div.className); // one two three
+        div.classList.remove("three");
+        console.log(div.className); // one two
+        ```
+
+      - Element.innerHTML
+        返回一个字符串，等同于该元素包含的所有 HTML 代码，该属性可读写，常用来设置某个节点的内容，他能改写所有元素节点的内容，包括`<HTML>`和`<body>`元素
+
+        ```js
+        <div class="one two three"></div>;
+        var div = document.querySelector("div");
+        div.innerHTML = "Hello World!";
+        console.log(div.innerHTML); // Hello World!
+        ```
+
+      - Element.innerText
+        与 innerHTML 类似，不同的是 innerText 无法识别元素，会直接渲染成字符串
+
+        ```js
+        <div class="one two three"></div>;
+        var div = document.querySelector("div");
+        div.innerHTML = '<a href="http://www.baidu.com">Hello World!</a>';
+        console.log(div.innerHTML); // Hello World! (会识别标签)
+        div.innerText = '<a href="http://www.baidu.com">Hello World!</a>';
+        console.log(div.innerText); // <a href="http://www.baidu.com">Hello World!</a> (不会识别标签)
+        ```
+
+  - Attribute 属性
+
+    - Element.getAttribute()
+      返回当前元素节点的指定属性，如果属性不存在，则返回`null`
+
+      ```js
+      <div id="div1" class="demo"></div>;
+      var div = document.getElementById("div1");
+      div.getAttribute("class"); // demo
+      ```
+
+    - Element.setAttribute()
+      用于为当前元素节点新增属性，如果同名属性已存在，则相当于编辑已存在的属性
+
+      ```js
+      <div id="div1"></div>;
+      var div = document.getElementById("div1");
+      div.setAttribute("class", "demo1"); // <div id="div1" class="demo1"></div>
+      div.setAttribute("class", "demo2"); // <div id="div1" class="demo2"></div>
+      ```
+
+    - Element.hasAttribute()
+      返回一个布尔值，表示当前元素节点是否包含指定属性
+
+      ```js
+      <div id="div1"></div>;
+      var div = document.getElementById("div1");
+      div.hasAttribute("id"); // true
+      div.hasAttribute("class"); // false
+      ```
+
+    - Element.removeAttribute()  
+      用于从当前元素节点移除属性
+
+      ```js
+      <div id="div1" class="demo"></div>;
+      document.getElementById("div1").removeAttribute("class");
+      ```
+
+  - Node 节点
+
+    - textContent 属性
+      返回当前节点和它所有后代节点的文本内容
+
+      ```js
+      <div id="box">
+        <p>这是一个文本</p>
+        <a href="#">这是一个链接</a>
+      </div>;
+      var div = document.getElementById("box");
+      console.log(div.textContent);
+      /**
+       * 这是一个文本
+       * 这是一个链接
+       */
+      div.textContent = "这是新的文本";
+      console.log(div.textContent);
+      /**
+       * 这是新的文本
+       */
+      ```
+
+    - appendChild 属性
+      接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点，返回值是插入文档的子节点
+
+      ```js
+      <div id="container"></div>;
+      var container = document.getElementById("container");
+      var p = document.createElement("p");
+      p.innerHTML = "Hello World";
+      container.appendChild(p);
+      ```
+
+- CSS 操作
+
+  - 直接`style`属性
+    使用网页元素节点的`setAttribute`方法直接操作网页元素的`style`属性
+
+    ```js
+    <div id="box"></div>;
+    var div = document.getElementById("box");
+    div.setAttribute("style", "color: red; font-size: 20px;");
     ```
 
-  - 外部脚本(引入本地独立 JS 文件)：
+  - 元素节点的`style`属性
 
-    ```html
-    <!-- 可以在 head or body 引入 -->
-    <script src=""></script>
+    ```js
+    <div id="box"></div>;
+    var div = document.getElementById("box");
+    var divStyle = div.style;
+    divStyle.color = "red";
+    divStyle.fontSize = "20px";
+    divStyle.backgroundColor = "yellow";
     ```
 
-  - 引入网络来源文件：
+  - `cssText`属性
 
-    ```html
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    ```js
+    <div id="box"></div>;
+    var div = document.getElementById("box");
+    var divStyle = div.style;
+    divStyle.cssText = "color: red; font-size: 20px; background-color: yellow;";
     ```
 
-- ### 更新中... 上次更新时间：2025-07-24
+### 事件
+
+- 事件类型
+
+  - 鼠标事件
+    与鼠标相关的事件
+
+    - `click`
+      按下鼠标时触发
+
+      ```js
+      <button id="btn"></button>;
+      var btn = document.getElementById("btn");
+      // + on
+      btn.onclick = function () {
+        // 弹出提示
+        alert("点击了");
+      };
+      ```
+
+    - `mousedown`
+      按下鼠标键时触发
+
+      ```js
+      <button id="btn"></button>;
+      var btn = document.getElementById("btn");
+      // + on
+      btn.onmousedown = function () {
+        // 弹出提示
+        alert("鼠标按下");
+      };
+      ```
+
+    - `mouseup`
+      释放按下的鼠标键时触发
+
+      ```js
+      <button id="btn"></button>;
+      var btn = document.getElementById("btn");
+      // + on
+      btn.onmouseup = function () {
+        // 弹出提示
+        alert("鼠标抬起");
+      };
+      ```
+
+    - `mousemove`
+      当鼠标在节点内部移动时触发，当鼠标持续移动时，该事件会连触发
+
+      ```js
+      <button id="btn"></button>;
+      var btn = document.getElementById("btn");
+      // + on
+      btn.onmousemove = function () {
+        // 弹出提示
+        alert("鼠标移动");
+      };
+      ```
+
+    - `mouseover`
+      鼠标进入一个节点时触发
+
+      ```js
+      <button id="btn"></button>;
+      var btn = document.getElementById("btn");
+      // + on
+      btn.onmouseover = function () {
+        // 弹出提示
+        alert("鼠标移入");
+      };
+      ```
+
+    - `mouseout`
+      鼠标离开一个节点时触发
+
+      ```js
+      <button id="btn"></button>;
+      var btn = document.getElementById("btn");
+      // + on
+      btn.onmouseout = function () {
+        // 弹出提示
+        alert("鼠标移出");
+      };
+      ```
+
+  - 键盘事件
+    键盘事件由用户击打键盘触发
+
+    - `keydown`
+      按下键盘时触发
+
+      ```js
+      <input type="text" id="input">
+      var input = document.getElementById("input");
+      // e 表示 event(事件对象) ，有很多属性
+      input.onkeydown = function(e) {
+        //keycode 表示按键的编码，唯一
+        console.log(e.keycode);
+        // keycode=13 表示回车键
+        if(e.keycode === 13) {
+          alert("按下回车键");
+        }
+      }
+      ```
+
+    - `keypress`
+      按下有值的键时触发，即按下`Ctrl`、`Alt`、`Shift`、`Meta`这样无值的键，这个事件不会触发，对于有值的键，按下时先触发`keydown`事件，再触发这个事件
+
+      ```js
+      <input type="text" id="input">
+      var input = document.getElementById("input");
+      input.onkeypress = function(e) {
+        console.log(e.keycode);
+      }
+      ```
+
+    - `keyup`
+      松开键盘时触发该事件
+
+      ```js
+      <input type="text" id="input">
+      var input = document.getElementById("input");
+      input.onkeyup = function(e) {
+        console.log(e.keycode);
+      }
+      ```
+
+  - 表单事件
+    表单事件是在使用表单元素及输入框可以监听的一系列事件
+
+    - `input`
+
+      ```js
+      <input type="text" id="input">
+      var input = document.getElementById("input");
+      input.oninput = function(e) {
+        // e.target.value 获取输入框的值
+        console.log(e.target.value);
+      }
+      ```
+
+    - `select`
+
+      ```js
+      <input type="text" id="input">
+      var input = document.getElementById("input");
+      input.onselect = function(e) {
+        // e.target.value 获取选中的值
+        console.log(e.target.value);
+      }
+      ```
+
+    - `change`
+
+      ```js
+      <input type="text" id="input">
+      var input = document.getElementById("input");
+      input.onchange = function(e) {
+        // e.target.value 按回车或失去焦点的时候，获取输入框的值
+        console.log(e.target.value);
+      }
+      ```
+
+  - Touch 事件
+    触摸引发的事件，可以通过`TouchEvent.type`属性查看发生的是哪一种事件
+
+    - `touchstart`
+      用户开始触摸时触发，它的`target`属性返回发生触摸的元素节点
+
+      ```js
+      <div id="box"></div>
+      // 只能用 DOM 2级事件绑定方式
+      var box = document.getElementById("box");
+      box.addEventListener("touchstart", function (e) {
+        console.log(e.target);
+      })
+      ```
+
+    - `touchend`
+      用户不在接触触摸屏时触发
+
+      ```js
+      <div id="box"></div>
+      // 只能用 DOM2 级事件绑定方式
+      var box = document.getElementById("box");
+      box.addEventListener("touchend", function (e) {
+        console.log(e.target);
+      })
+      ```
+
+    - `touchmove`
+      用户移动触摸点时触发
+
+      ```js
+      <div id="box"></div>
+      // 只能用 DOM2 级事件绑定方式
+      var box = document.getElementById("box");
+      box.addEventListener("touchmove", function (e) {
+        console.log(e.target);
+      })
+      ```
+
+- 事件处理程序
+  为页面添加事件
+
+  - HTML 事件处理
+    
+    ```js
+    <button id="btn" onclick="demo()">按钮</button>
+    function demo() {
+      alert("html 事件处理");
+    }
+    ```
+
+  - DOM 0级事件处理
+
+    ```js
+    <button id="btn">按钮</button>   
+    var btn = document.getElementById("btn");
+    btn.onclick = function () {
+      alert("DOM 0级事件处理");
+    }
+    // 如果再来一个
+    btn.onclick = function () {
+      console.log("click");
+    }
+    // 只会执行最后一个，会覆盖上一个
+    ```
+
+  - DOM 2级事件处理
+
+    ```js
+    <button id="btn">按钮</button>   
+    var btn = document.getElementById("btn");
+    btn.addEventListener("click", demo1);
+    btn.addEventListener("click", demo2);
+    btn.addEventListener("click", demo3);
+    function demo1() {
+      alert("DOM 2级事件处理1");
+    } 
+    function demo1() {
+      alert("DOM 2级事件处理2");
+    } 
+    function demo1() {
+      alert("DOM 2级事件处理3");
+    } 
+    // 三个都执行
+    ```
+
+- 事件代理(事件委托)
+  由于事件会在冒泡阶段向上传播到父节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件
+
+  ```js
+  <ul id="list">
+    <li>列表1</li>
+    <li>列表2</li>
+    <li>列表3</li>
+  </ul>  
+  var list = document.getElementById("list");
+  // 定义父节点的监听函数，处理子元素
+  list.onclick = function(e) { 
+    if(event.target.nodeName == "LI") {
+      // 打印子元素内容
+      console.log(event.target.innerHTML);
+    }
+  }
+  ```
+
+- ### 更新中... 上次更新时间：2025-07-27
 
 ---
 
