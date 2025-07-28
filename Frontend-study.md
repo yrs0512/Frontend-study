@@ -4,7 +4,7 @@
 
 ## <span style="color: #00aaffff">一. HTML5</span>
 
-### html 概念
+### html 简介
 
 html 是一种超文本标记语言，用于构建和呈现 Web 页面内容
 
@@ -291,7 +291,7 @@ html 是一种超文本标记语言，用于构建和呈现 Web 页面内容
 
 ## <span style="color: #00aaffff">二. CSS3</span>
 
-### CSS 概念
+### CSS 简介
 
 CSS 称为层叠样式表，又叫级联样式表，用于描述网页的外观和格式
 
@@ -2163,82 +2163,84 @@ var arr = [1, "hello", true, { name: "hello" }];
       用户开始触摸时触发，它的`target`属性返回发生触摸的元素节点
 
       ```js
-      <div id="box"></div>
+      <div id="box"></div>;
       // 只能用 DOM 2级事件绑定方式
       var box = document.getElementById("box");
       box.addEventListener("touchstart", function (e) {
         console.log(e.target);
-      })
+      });
       ```
 
     - `touchend`
       用户不在接触触摸屏时触发
 
       ```js
-      <div id="box"></div>
+      <div id="box"></div>;
       // 只能用 DOM2 级事件绑定方式
       var box = document.getElementById("box");
       box.addEventListener("touchend", function (e) {
         console.log(e.target);
-      })
+      });
       ```
 
     - `touchmove`
       用户移动触摸点时触发
 
       ```js
-      <div id="box"></div>
+      <div id="box"></div>;
       // 只能用 DOM2 级事件绑定方式
       var box = document.getElementById("box");
       box.addEventListener("touchmove", function (e) {
         console.log(e.target);
-      })
+      });
       ```
 
 - 事件处理程序
   为页面添加事件
 
   - HTML 事件处理
-    
+
     ```js
-    <button id="btn" onclick="demo()">按钮</button>
+    <button id="btn" onclick="demo()">
+      按钮
+    </button>;
     function demo() {
       alert("html 事件处理");
     }
     ```
 
-  - DOM 0级事件处理
+  - DOM 0 级事件处理
 
     ```js
-    <button id="btn">按钮</button>   
+    <button id="btn">按钮</button>;
     var btn = document.getElementById("btn");
     btn.onclick = function () {
       alert("DOM 0级事件处理");
-    }
+    };
     // 如果再来一个
     btn.onclick = function () {
       console.log("click");
-    }
+    };
     // 只会执行最后一个，会覆盖上一个
     ```
 
-  - DOM 2级事件处理
+  - DOM 2 级事件处理
 
     ```js
-    <button id="btn">按钮</button>   
+    <button id="btn">按钮</button>;
     var btn = document.getElementById("btn");
     btn.addEventListener("click", demo1);
     btn.addEventListener("click", demo2);
     btn.addEventListener("click", demo3);
     function demo1() {
       alert("DOM 2级事件处理1");
-    } 
+    }
     function demo1() {
       alert("DOM 2级事件处理2");
-    } 
+    }
     function demo1() {
       alert("DOM 2级事件处理3");
-    } 
+    }
     // 三个都执行
     ```
 
@@ -2250,15 +2252,15 @@ var arr = [1, "hello", true, { name: "hello" }];
     <li>列表1</li>
     <li>列表2</li>
     <li>列表3</li>
-  </ul>  
+  </ul>;
   var list = document.getElementById("list");
   // 定义父节点的监听函数，处理子元素
-  list.onclick = function(e) { 
-    if(event.target.nodeName == "LI") {
+  list.onclick = function (e) {
+    if (event.target.nodeName == "LI") {
       // 打印子元素内容
       console.log(event.target.innerHTML);
     }
-  }
+  };
   ```
 
 - ### 更新中... 上次更新时间：2025-07-27
@@ -2267,15 +2269,15 @@ var arr = [1, "hello", true, { name: "hello" }];
 
 ## <span style="color: #00aaffff">四. git 部署</span>
 
-- ### _Git 简介_
+### Git 简介
 
 Git 是目前世界上最先进的分布式版本控制系统
 
-- ### _使用 Git 目的_
+### 使用 Git 目的
 
 高效管理项目(尤其是代码)的版本历史，并支持团队协作
 
-- ### _Git 基本概念_
+### Git 基本概念
 
 1. 工作区(Workspace)：放项目代码的地方，项目代码对应的文件
 
@@ -2283,54 +2285,450 @@ Git 是目前世界上最先进的分布式版本控制系统
 
 3. 本地仓库(Repository)：就是安全放数据的位置，这里边有你提交的所有版本的数据
 
-- ### _Git 常用操作_
+### Git 常用操作
 
-  - 初始化本地仓库
+- 初始化本地仓库
 
-    ```bash
-    git init
+  ```bash
+  git init
+  ```
+
+会创建一个名为`.git`的隐藏目录(在文件中用终端打开)
+
+- 添加文件到暂存区
+
+  ```bash
+  git add README.md      # 添加单个文件
+  git add .              # 添加所有修改
+  ```
+
+- 提交暂存区到本地仓库
+
+  ```bash
+  git commit -m "注释"   # -m 后跟提交描述，"" or ''
+  ```
+
+- 配置远程仓库
+
+  ```bash
+  git remote add origin https://github.com/yrs0512/Frontend-study.git # SSH
+  ```
+
+- 推送到远程仓库
+
+  ```bash
+  git push -u origin master
+  ```
+
+- 查看提交记录
+
+  ```bash
+  git log
+  git log --oneline     # 显示简略提交记录
+  ```
+
+- 查看当前所有的远程仓库
+
+  ```bash
+  git remote -v
+  ```
+
+### 更新中... 上次更新时间：2025-07-23
+
+---
+
+## <span style="color: #00aaffff">五. Vue 框架</span>
+
+### Vue 简介
+
+Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易用，性能出色，适用场景丰富的 Web 前端框架
+
+### 基本概念
+
+1. 渐进式框架：指一个框架可以根据项目需求逐步采用，而不是必须一次性全盘接受它的所有特性
+
+### Vue API 风格
+
+选项式 API (Vue2)
+
+组合式 API (Vue3)
+
+### Vue 创建项目
+
+1. 创建文件夹(**小写**)，打开命令行，转到文件夹
+
+   ```bash
+   cd D:\Frontend-study\vue-project\first-demo
+   ```
+
+2. 创建 Vue 项目
+
+   ```bash
+   npm init vue@latest
+   ```
+
+3. 运行 Vue 项目
+
+   ```bash
+   cd vue-project
+   npm install  # 安装依赖 (node_modules)
+   npm run dev  # 运行项目
+   ```
+
+### Vue 项目目录结构
+
+|     文件夹     |                  说明                  |
+| :------------: | :------------------------------------: |
+|    .vscode     |        VSCode 工具的配置文件夹         |
+|  node_modules  |        Vue 项目的运行依赖文件夹        |
+|     public     |         资源文件夹(浏览器图标)         |
+|      src       |               源码文件夹               |
+|   .gitignore   |              Git 忽略文件              |
+|   index.html   |             入口 HTML 文件             |
+|  package.json  | 信息描述文件(项目名称、版本，Vue 版本) |
+|   README.md    |                注释文件                |
+| vite.config.js |              Vue 配置文件              |
+
+### 模板语法
+
+- 概念
+  Vue 使用基于 HTML 的模板语法，允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据，所有的 Vue 模板都是语法层面合法的 HTML ，可以被符合规范的浏览器和 HTML 解析器解析
+
+- 文本插值
+  最基础的数据绑定形式，使用"Mustache"语法(即双大括号`{{}}`)
+
+  ```html
+  <template>
+    <p>{{ msg }}</p>
+  </template>
+
+  <script>
+    export default {
+      data() {
+        return {
+          msg: "Hello World!",
+        };
+      },
+    };
+  </script>
+  ```
+
+- 使用 JS 表达式
+  每个绑定仅支持**单一表达式**，也就是一段能够被求值的 JS 代码，一个简单的判断方法就是是否可以合法的写在`return`后面
+
+  ```html
+  <template>
+    <p>{{ number + 1 }}</p>
+    <p>{{ ok ? 'Yes' : 'No' }}</p>
+    <p>{{ message.split('').reverse().join('') }}</p>
+    <!-- 这是一个语句，而非表达式 -->
+    <p>{{ var a = 1 }}</p>
+    <!-- 条件控制也不支持，请使用三元表达式 -->
+    <p>{{ if(ok) {return message} }}</p>
+  </template>
+
+  <script>
+    export default {
+      data() {
+        return {
+          number: 10,
+          ok: true,
+          message: "Hello World",
+        };
+      },
+    };
+  </script>
+  ```
+
+- 原始 HTML
+  双大括号会将数据插值为纯文本，而非 HTML 代码。为了输出真正的 HTML，需要使用`v-html`指令
+
+  ```html
+  <template>
+    <p>纯文本：{{ rawHTML }}</p>
+    <p>属性：<span v-html="rawHTML"></span></p>
+  </template>
+
+  <script>
+    export default {
+      data() {
+        return {
+          rawHTML: "<a href='#'>链接</a>",
+        };
+      },
+    };
+  </script>
+  ```
+
+- 属性绑定
+  "Mustache"语法不能作用在 HTML 特性(attributes)上，想要响应式地绑定一个 attributes ，应该使用`v-bind`指令
+
+  ```html
+  <template>
+    <div v-bind:id="dynamicId" v-bind:class="dynamicClass"></div>
+  </template>
+
+  <script>
+    export default {
+      data() {
+        return {
+          // dynamic 动态
+          dynamicId: "appID",
+          /**
+           * v-bind 指令指示 Vue 将元素的 id attribute 与组件的 dynamicId属性保持一致，如果绑定的值是 null 或者  undefined ，那么该 attribute 将会从渲染的元素上移除
+           */
+          // class 被移除
+          dyynamicClass: null,
+        };
+      },
+    };
+  </script>
+  ```
+
+  - 简写
+    因为`v-bind`非常常用，我们提供特定的简写语法
+
+    ```html
+    <div :id="dynamicId" :class="dynamicClass"></div>
     ```
 
-  会创建一个名为`.git`的隐藏目录(在文件中用终端打开)
+  - 布尔型 Attribute
+    依据`true`/`false`值来决定 attribute 是否应该存在于该元素上
 
-  - 添加文件到暂存区
+    ```html
+    <template>
+      <button :disabled="isButtonDisabled">Button</button>
+    </template>
 
-    ```bash
-    git add README.md      # 添加单个文件
-    git add .              # 添加所有修改
+    <script>
+      export default {
+        data() {
+          return {
+            isButtonDisabled: true,
+          };
+        },
+      };
+    </script>
     ```
 
-  - 提交暂存区到本地仓库
+  - 动态绑定多个值
+    包含多个 attribute 的 JS 对象
 
-    ```bash
-    git commit -m "注释"   # -m 后跟提交描述，"" or ''
+  - 布尔型 Attribute
+    依据`true`/`false`值来决定 attribute 是否应该存在于该元素上
+
+    ```html
+    <template>
+      <div v-bind="objectOfAttrs">多个属性绑定</div>
+    </template>
+
+    <script>
+      export default {
+        data() {
+          return {
+            objectOfAttrs: {
+              id: "dynamicId",
+              class: "dynamicClass",
+            },
+          };
+        },
+      };
+    </script>
     ```
 
-  - 配置远程仓库
+- 条件渲染
+  根据条件显示或隐藏元素
 
-    ```bash
-    git remote add origin https://github.com/yrs0512/Frontend-study.git # SSH
+  - `v-if`
+    用于条件性地渲染一块内容，这块内容只会在指令的表达式返回真值时才被渲染
+
+    ```html
+    <template>
+      <div v-if="flag">你能看见我么</div>
+    </template>
+
+    <script>
+      export default {
+        data() {
+          return {
+            flag: true,
+          };
+        },
+      };
+    </script>
     ```
 
-  - 推送到远程仓库
+  - `v-else`
+    为`v-if`提供一个"else 区块"
 
-    ```bash
-    git push -u origin master
+    ```html
+    <template>
+      <div v-if="flag">你能看见我么</div>
+      <div v-else>那你还是看看我吧</div>
+    </template>
+
+    <script>
+      export default {
+        data() {
+          return {
+            flag: false,
+          };
+        },
+      };
+    </script>
     ```
 
-  - 查看提交记录
+  - `v-else-if`
+    为`v-if`提供"else if 区块"，可以连续多次重复使用
 
-    ```bash
-    git log
-    git log --oneline     # 显示简略提交记录
+    ```html
+    <template>
+      <div v-if="type === 'A'">A</div>
+      <div v-else-if="type === 'B'">B</div>
+      <div v-else-if="type === 'C'">C</div>
+      <div v-else>Not A/B/C</div>
+    </template>
+
+    <script>
+      export default {
+        data() {
+          return {
+            type: "C",
+          };
+        },
+      };
+    </script>
     ```
 
-  - 查看当前所有的远程仓库
+  - `v-show`
+    按条件显示一个元素，跟`v-if`用法基本一样
 
-    ```bash
-    git remote -v
+    ```html
+    <template>
+      <div v-show="flag">你能看见我么</div>
+    </template>
+
+    <script>
+      export default {
+        data() {
+          return {
+            flag: true,
+          };
+        },
+      };
+    </script>
     ```
 
-- ### 更新中... 上次更新时间：2025-07-23
+    `v-if` VS `v-show`
+
+    `v-if`是"真实的"按条件渲染，因为它确保了在切换时，条件区块内的事件监听器和子组件都会被销毁与重建。
+    `v-if`也是**惰性**的：如果在初次渲染时条件值为`false`，则不会做任何事，条件区块只有当条件首次变为`true`时才被渲染。
+    相比之下，`v-show`简单许多，元素无论初始条件如何，始终会被渲染，只有 CSS `display`属性会被切换(`false`对应`display: none;`)。
+    总的来说，`v-if`有更高的切换开销，而`v-show`有更高的初始渲染开销。因此，如果需要频繁切换，则使用`v-show`较好，如果在运行时绑定条件很少改变，则`v-if`会更合适
+
+- 列表渲染
+
+  - `v-for`
+    使用`v-for`基于一个数组来渲染一个列表，`v-for`指令的值需要使用`item in items`形式的特殊语法，其中`items`是源数据的数组，二`item`是迭代项的**别名**
+
+    ```html
+    <template>
+      <div>
+        <!-- item 和 items 是别名，可以自定义 -->
+        <p v-for="data in names">{{ data }}</p>
+        <!-- in 可以用 of 代替,更接近 JS 迭代器语法 -->
+        <p v-for="data of names">{{ data }}</p>
+      </div>
+    </template>
+
+    <script>
+      export default {
+        data() {
+          return {
+            names: ["张三", "李四", "王五"],
+          };
+        },
+      };
+    </script>
+    ```
+
+    复杂数据(来源于网络请求，`json`格式)
+
+    ```html
+    <template>
+      <div v-for="item of result">
+        <p>{{ item.name }}</p>
+        <!-- 动态属性 -->
+        <img :src="item.avator" alt="" />
+      </div>
+    </template>
+
+    <script>
+      export default {
+        data() {
+          return {
+            result: [
+              {
+                name: "douyin",
+                avator: "https://picsum.photos/200/300",
+              },
+              {
+                name: "bilibili",
+                avator: "https://picsum.photos/200/300",
+              },
+            ],
+          };
+        },
+      };
+    </script>
+    ```
+
+    `v-for`也支持使用可选的第二个参数表示当前项的位置索引
+
+    ```html
+    <template>
+      <div>
+        <!-- 顺序固定 -->
+        <p v-for="(item, index) of names">{{ index }}:{{ item }}</p>
+      </div>
+    </template>
+
+    <script>
+      export default {
+        data() {
+          return {
+            names: ["张三", "李四", "王五"],
+          };
+        },
+      };
+    </script>
+    ```    
+
+    `v-for`与对象
+    可以使用`v-for`来遍历一个对象的所有属性
+
+    ```html
+    <template>
+      <div>
+        <!-- 顺序固定,key 为对象属性名(name、age) value为对象属性值(张三、18) -->
+        <p v-for="(value, key, index) of userInfo">{{ value }}-{{ key }}-{{  index}}</p>
+      </div>
+    </template>
+
+    <script>
+      export default {
+        data() {
+          return {
+            userInfo: {
+              name: "张三",
+              age: 18,
+            }
+          };
+        },
+      };
+    </script>
+    ```        
+
+### 更新中... 上次更新时间：2025-07-28
 
 ---
