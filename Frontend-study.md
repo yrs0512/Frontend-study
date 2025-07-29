@@ -617,18 +617,18 @@ p {
 
 - 设置背景图像的起始位置`background-position`
 
-|       值        |                             说明                             |
-| :-------------: | :----------------------------------------------------------: |
-|   `left top`    |                            左上角                            |
-|  `left center`  |                            左 中                             |
-|  `left bottom`  |                            左 下                             |
-|   `right top`   |                            右 上                             |
-| `right center`  |                            右 中                             |
-| `right bottom`  |                            右 下                             |
-|  `center top`   |                            中 上                             |
-| `center center` |                            中 中                             |
-| `center bottom` |                            中 下                             |
-|     `x% y%`     | 左上角是`0% 0%`,如果指定一个值，其他默认`50%`，默认是`0% 0%` |
+|       值        |                           说明                            |
+| :-------------: | :-------------------------------------------------------: |
+|   `left top`    |                          左上角                           |
+|  `left center`  |                           左 中                           |
+|  `left bottom`  |                           左 下                           |
+|   `right top`   |                           右 上                           |
+| `right center`  |                           右 中                           |
+| `right bottom`  |                           右 下                           |
+|  `center top`   |                           中 上                           |
+| `center center` |                           中 中                           |
+| `center bottom` |                           中 下                           |
+|     `x% y%`     | 左上角是 0% 0%,如果指定一个值，其他默认 50%，默认是 0% 0% |
 
 - 设置背景固定还是随页面滑动`background-attachment`
 
@@ -1129,7 +1129,7 @@ li {
   <!-- 
    width = device-width 宽度等于当前设备的宽度
    initial-scale = 1.0 初始缩放比例(默认设置为1.0)
-   maximum-scale = 1.0 语序用户缩放到的最大比例(默认设置为1.0)
+   maximum-scale = 1.0 允许用户缩放到的最大比例(默认设置为1.0)
    minimum-scale 用户是否可以手动缩放(默认设置为no)
    -->
   <meta
@@ -1397,9 +1397,9 @@ JavaScript（简称 JS）是一种轻量级、解释型（或即时编译型）�
 
 打印(日志信息)：在浏览器中显示出来
 
-    ```js
-    console.log("hello world");
-    ```
+```js
+console.log("hello world");
+```
 
 条件语句
 
@@ -1784,7 +1784,7 @@ var arr = [1, "hello", true, { name: "hello" }];
         var paras = document.getElementsByClassName("names");
         ```
 
-      - `getElementById()`
+      - `getElementByName()`
         用于选择拥有`name`属性的 HTML 元素(`<form>`、`<radio>`、`<img>`等)，返回一个类似于数组的对象(NodeList 实例)，因为`name`属性相同的元素可能不止一个
 
         ```js
@@ -2263,7 +2263,7 @@ var arr = [1, "hello", true, { name: "hello" }];
   };
   ```
 
-- ### 更新中... 上次更新时间：2025-07-27
+### 更新中... 上次更新时间：2025-07-27
 
 ---
 
@@ -2397,30 +2397,30 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
 - 文本插值
   最基础的数据绑定形式，使用"Mustache"语法(即双大括号`{{}}`)
 
-  ```html
+  ```vue
   <template>
     <p>{{ msg }}</p>
   </template>
 
   <script>
-    export default {
-      data() {
-        return {
-          msg: "Hello World!",
-        };
-      },
-    };
+  export default {
+    data() {
+      return {
+        msg: "Hello World!",
+      };
+    },
+  };
   </script>
   ```
 
 - 使用 JS 表达式
   每个绑定仅支持**单一表达式**，也就是一段能够被求值的 JS 代码，一个简单的判断方法就是是否可以合法的写在`return`后面
 
-  ```html
+  ```vue
   <template>
     <p>{{ number + 1 }}</p>
-    <p>{{ ok ? 'Yes' : 'No' }}</p>
-    <p>{{ message.split('').reverse().join('') }}</p>
+    <p>{{ ok ? "Yes" : "No" }}</p>
+    <p>{{ message.split("").reverse().join("") }}</p>
     <!-- 这是一个语句，而非表达式 -->
     <p>{{ var a = 1 }}</p>
     <!-- 条件控制也不支持，请使用三元表达式 -->
@@ -2428,60 +2428,61 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
   </template>
 
   <script>
-    export default {
-      data() {
-        return {
-          number: 10,
-          ok: true,
-          message: "Hello World",
-        };
-      },
-    };
+  export default {
+    data() {
+      return {
+        number: 10,
+        ok: true,
+        message: "Hello World",
+      };
+    },
+  };
   </script>
   ```
 
 - 原始 HTML
   双大括号会将数据插值为纯文本，而非 HTML 代码。为了输出真正的 HTML，需要使用`v-html`指令
 
-  ```html
+  ```vue
   <template>
     <p>纯文本：{{ rawHTML }}</p>
     <p>属性：<span v-html="rawHTML"></span></p>
   </template>
 
   <script>
-    export default {
-      data() {
-        return {
-          rawHTML: "<a href='#'>链接</a>",
-        };
-      },
-    };
+  export default {
+    data() {
+      return {
+        rawHTML: "<a href='#'>链接</a>",
+      };
+    },
+  };
   </script>
   ```
 
 - 属性绑定
   "Mustache"语法不能作用在 HTML 特性(attributes)上，想要响应式地绑定一个 attributes ，应该使用`v-bind`指令
 
-  ```html
+  ```vue
   <template>
     <div v-bind:id="dynamicId" v-bind:class="dynamicClass"></div>
   </template>
 
   <script>
-    export default {
-      data() {
-        return {
-          // dynamic 动态
-          dynamicId: "appID",
-          /**
-           * v-bind 指令指示 Vue 将元素的 id attribute 与组件的 dynamicId属性保持一致，如果绑定的值是 null 或者  undefined ，那么该 attribute 将会从渲染的元素上移除
-           */
-          // class 被移除
-          dyynamicClass: null,
-        };
-      },
-    };
+  export default {
+    data() {
+      return {
+        // dynamic 动态
+        dynamicId: "appID",
+        /**
+         * v-bind 指令指示 Vue 将元素的 id attribute 与组件的 dynamicId属性保持一致，
+         * 如果绑定的值是 null 或者  undefined ，那么该 attribute 将会从渲染的元素上移除
+         */
+        // class 被移除
+        dyynamicClass: null,
+      };
+    },
+  };
   </script>
   ```
 
@@ -2495,44 +2496,41 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
   - 布尔型 Attribute
     依据`true`/`false`值来决定 attribute 是否应该存在于该元素上
 
-    ```html
+    ```vue
     <template>
       <button :disabled="isButtonDisabled">Button</button>
     </template>
 
     <script>
-      export default {
-        data() {
-          return {
-            isButtonDisabled: true,
-          };
-        },
-      };
+    export default {
+      data() {
+        return {
+          isButtonDisabled: true,
+        };
+      },
+    };
     </script>
     ```
 
   - 动态绑定多个值
     包含多个 attribute 的 JS 对象
 
-  - 布尔型 Attribute
-    依据`true`/`false`值来决定 attribute 是否应该存在于该元素上
-
-    ```html
+    ```vue
     <template>
       <div v-bind="objectOfAttrs">多个属性绑定</div>
     </template>
 
     <script>
-      export default {
-        data() {
-          return {
-            objectOfAttrs: {
-              id: "dynamicId",
-              class: "dynamicClass",
-            },
-          };
-        },
-      };
+    export default {
+      data() {
+        return {
+          objectOfAttrs: {
+            id: "dynamicId",
+            class: "dynamicClass",
+          },
+        };
+      },
+    };
     </script>
     ```
 
@@ -2542,46 +2540,46 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
   - `v-if`
     用于条件性地渲染一块内容，这块内容只会在指令的表达式返回真值时才被渲染
 
-    ```html
+    ```vue
     <template>
       <div v-if="flag">你能看见我么</div>
     </template>
 
     <script>
-      export default {
-        data() {
-          return {
-            flag: true,
-          };
-        },
-      };
+    export default {
+      data() {
+        return {
+          flag: true,
+        };
+      },
+    };
     </script>
     ```
 
   - `v-else`
     为`v-if`提供一个"else 区块"
 
-    ```html
+    ```vue
     <template>
       <div v-if="flag">你能看见我么</div>
       <div v-else>那你还是看看我吧</div>
     </template>
 
     <script>
-      export default {
-        data() {
-          return {
-            flag: false,
-          };
-        },
-      };
+    export default {
+      data() {
+        return {
+          flag: false,
+        };
+      },
+    };
     </script>
     ```
 
   - `v-else-if`
     为`v-if`提供"else if 区块"，可以连续多次重复使用
 
-    ```html
+    ```vue
     <template>
       <div v-if="type === 'A'">A</div>
       <div v-else-if="type === 'B'">B</div>
@@ -2590,32 +2588,32 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
     </template>
 
     <script>
-      export default {
-        data() {
-          return {
-            type: "C",
-          };
-        },
-      };
+    export default {
+      data() {
+        return {
+          type: "C",
+        };
+      },
+    };
     </script>
     ```
 
   - `v-show`
     按条件显示一个元素，跟`v-if`用法基本一样
 
-    ```html
+    ```vue
     <template>
       <div v-show="flag">你能看见我么</div>
     </template>
 
     <script>
-      export default {
-        data() {
-          return {
-            flag: true,
-          };
-        },
-      };
+    export default {
+      data() {
+        return {
+          flag: true,
+        };
+      },
+    };
     </script>
     ```
 
@@ -2631,7 +2629,7 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
   - `v-for`
     使用`v-for`基于一个数组来渲染一个列表，`v-for`指令的值需要使用`item in items`形式的特殊语法，其中`items`是源数据的数组，二`item`是迭代项的**别名**
 
-    ```html
+    ```vue
     <template>
       <div>
         <!-- item 和 items 是别名，可以自定义 -->
@@ -2642,19 +2640,19 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
     </template>
 
     <script>
-      export default {
-        data() {
-          return {
-            names: ["张三", "李四", "王五"],
-          };
-        },
-      };
+    export default {
+      data() {
+        return {
+          names: ["张三", "李四", "王五"],
+        };
+      },
+    };
     </script>
     ```
 
     复杂数据(来源于网络请求，`json`格式)
 
-    ```html
+    ```vue
     <template>
       <div v-for="item of result">
         <p>{{ item.name }}</p>
@@ -2664,28 +2662,28 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
     </template>
 
     <script>
-      export default {
-        data() {
-          return {
-            result: [
-              {
-                name: "douyin",
-                avator: "https://picsum.photos/200/300",
-              },
-              {
-                name: "bilibili",
-                avator: "https://picsum.photos/200/300",
-              },
-            ],
-          };
-        },
-      };
+    export default {
+      data() {
+        return {
+          result: [
+            {
+              name: "douyin",
+              avator: "https://picsum.photos/200/300",
+            },
+            {
+              name: "bilibili",
+              avator: "https://picsum.photos/200/300",
+            },
+          ],
+        };
+      },
+    };
     </script>
     ```
 
     `v-for`也支持使用可选的第二个参数表示当前项的位置索引
 
-    ```html
+    ```vue
     <template>
       <div>
         <!-- 顺序固定 -->
@@ -2694,41 +2692,414 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
     </template>
 
     <script>
-      export default {
-        data() {
-          return {
-            names: ["张三", "李四", "王五"],
-          };
-        },
-      };
+    export default {
+      data() {
+        return {
+          names: ["张三", "李四", "王五"],
+        };
+      },
+    };
     </script>
-    ```    
+    ```
 
     `v-for`与对象
     可以使用`v-for`来遍历一个对象的所有属性
 
-    ```html
+    ```vue
     <template>
       <div>
         <!-- 顺序固定,key 为对象属性名(name、age) value为对象属性值(张三、18) -->
-        <p v-for="(value, key, index) of userInfo">{{ value }}-{{ key }}-{{  index}}</p>
+        <p v-for="(value, key, index) of userInfo">
+          {{ value }}-{{ key }}-{{ index }}
+        </p>
       </div>
     </template>
 
     <script>
+    export default {
+      data() {
+        return {
+          userInfo: {
+            name: "张三",
+            age: 18,
+          },
+        };
+      },
+    };
+    </script>
+    ```
+
+  - 通过`key`管理状态
+    Vue 默认按照“就地更新”的策略来更新通过`v-for`渲染的元素列表，当数据项顺序发生改变时，Vue 不会移动，二十就地更新，`key`属性可以用来给元素或组件提供唯一的标识，Vue 使用`key`来跟踪元素或组件的移动和复用，从而提高性能
+
+    ```vue
+    <template>
+      <div>
+        <!-- 
+         通过 v-bind 绑定唯一的 key 属性 
+         key 绑定的值期望是一个基础类型的值，例如字符串或 number 类型
+         -->
+        <p v-for="(data, index) of names" :key="index">{{ data }}</p>
+        <!-- 
+         不要使用 index 作为 key 值，确保每一条数据的唯一索引不会发生变化
+         网络请求的 id 固定，推荐使用
+         -->
+        <p v-for="(data, index) of result" :key="data.id">{{ data }}</p>
+      </div>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          names: ["张三", "李四", "王五"],
+          result: [
+            {
+              id: 32563,
+              name: "douyin",
+              avator: "https://picsum.photos/200/300",
+            },
+            {
+              id: 32564,
+              name: "bilibili",
+              avator: "https://picsum.photos/200/300",
+            },
+          ],
+        };
+      },
+    };
+    </script>
+    ```
+
+- 事件处理
+  使用`v-on`指令(简写为`@`)来监听 DOM 事件，并在事件触发时执行对应的 JS ，用法：`v-on:click="handleClick"`或 `@click="handleClick"`
+
+  - 事件处理器
+
+    - 内联处理器
+      事件被触发时执行的内联 JS 语句(与`onclick`类似)，用于简单场景
+
+      ```vue
+      <template>
+        <button @click="count++">add</button>
+        <p>{{ count }}</p>
+      </template>
+
+      <script>
       export default {
         data() {
           return {
-            userInfo: {
-              name: "张三",
-              age: 18,
-            }
+            count: 0,
           };
         },
       };
-    </script>
-    ```        
+      </script>
+      ```
 
-### 更新中... 上次更新时间：2025-07-28
+    - 方法事件处理器
+      一个指向组件上定义的方法的属性名或是路径
+
+      ```vue
+      <template>
+        <button @click="addcount">add</button>
+        <p>{{ count }}</p>
+      </template>
+
+      <script>
+      export default {
+        data() {
+          return {
+            count: 0,
+          };
+        },
+        // 所有的方法或者函数都放在这里
+        methods: {
+          // 这里可以定义方法
+          addcount() {
+            // 读取 data 里面的数据的方案：this.count
+            this.count++;
+          },
+        },
+      };
+      </script>
+      ```
+
+  - 事件参数
+    可以获取`event`对象和通过事件传递数据
+
+    - 获取`event`对象
+
+    ```vue
+    <template>
+      <button @click="addcount">add</button>
+      <p>{{ count }}</p>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          count: 0,
+        };
+      },
+      methods: {
+        addcount(e) {
+          this.count++;
+          /**
+           * 获取 event 对象
+           Vue 中的 event 对象，就是原生 JS 的 Event 对象
+           * PointerEvent {isTrusted: true, _vts: 1753781675534, pointerId: 1, width: 1, height: 1, …}
+           */
+          console.log(e);
+          // <button>add</button>
+          console.log(e.target);
+        },
+      },
+    };
+    </script>
+    ```
+
+    - 传递参数
+
+    ```vue
+    <template>
+      <button @click="addcount('hello')">add</button>
+      <p>{{ count }}</p>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          count: 0,
+        };
+      },
+      methods: {
+        addcount(msg) {
+          console.log(msg);
+          this.count++;
+        },
+      },
+    };
+    </script>
+    ```
+
+    - 获取列表中的内容和`event`(事件传参)
+
+    ```vue
+    <template>
+      <p
+        @click="getNameHandler(item)"
+        v-for="(item, index) of name"
+        :key="index"
+      >
+        {{ item }}
+      </p>
+      <p
+        @click="getNameHandlers(item, $event)"
+        v-for="(item, index) of names"
+        :key="index"
+      >
+        {{ item }}
+      </p>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          name: ["vue", "react", "angular"],
+          names: ["vue", "react", "angular"],
+        };
+      },
+      methods: {
+        getNameHandler(name) {
+          console.log(name);
+        },
+        getNameHandlers(name, e) {
+          console.log(name);
+          console.log(e);
+        },
+      },
+    };
+    </script>
+    ```
+
+  - 事件修饰符
+
+    - `.prevent`: 阻止默认行为
+
+    ```vue
+    <template>
+      <!-- 阻止默认事件 -->
+      <a @click.prevent="clickHander" href="https://www.baidu.com">百度</a>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {};
+      },
+      methods: {
+        clickHander() {
+          // 阻止默认事件后，点击链接不会跳转，与 .prevent 相同
+          // e.preventDefault();
+          console.log("点击了");
+        },
+      },
+    };
+    </script>
+    ```
+
+    - `.stop`: 阻止事件冒泡
+
+    ```vue
+    <template>
+      <!-- 阻止向上冒泡 -->
+      <div @click="clickDiv">
+        <p @click.stop="clickP"></p>
+      </div>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {};
+      },
+      methods: {
+        clickDiv() {
+          console.log("div clicked");
+        },
+        clickP() {
+          console.log("p clicked");
+        },
+      },
+    };
+    </script>
+    ```
+
+### 数组变化侦测
+
+- 变更方法
+  Vue 能够侦听响应式数组的变更方法，并在他们被调用时触发相关的更新
+
+  - `push()`
+
+  - `pop()`
+
+  - `shift()`
+
+  - `unshift()`
+
+  - `splice()`
+
+  - `sort()`
+
+  - `reverse()`
+
+  ```vue
+  <template>
+    <ul>
+      <button @click="addName">add</button>
+      <li v-for="(item, index) of names" :key="index">{{ item }}</li>
+    </ul>
+  </template>
+
+  <script>
+  export default {
+    data() {
+      return {
+        names: ["Alice", "Bob", "Charlie"],
+      };
+    },
+    methods: {
+      addName() {
+        // 对调用的原数组进行变更
+        // 引起 UI 自动更新
+        this.names.push("Dave");
+      },
+    },
+  };
+  </script>
+  ```
+
+- 替换一个数组
+  不会更改原数组，而是返回一个新数组
+
+  - `filter()`
+
+  - `concat()`
+
+  - `slice()`
+
+  ```vue
+  <template>
+    <ul>
+      <button @click="addName">add</button>
+      <li v-for="(item, index) of names" :key="index">{{ item }}</li>
+    </ul>
+  </template>
+
+  <script>
+  export default {
+    data() {
+      return {
+        names: ["Alice", "Bob", "Charlie"],
+      };
+    },
+    methods: {
+      addName() {
+        // 赋值返回
+        // 不会引起 UI 自动更新
+        this.names = this.names.concat("Dave");
+      },
+    },
+  };
+  </script>
+  ```
+
+### 计算属性
+用于描述依赖响应式状态的复杂逻辑
+
+```vue
+<template>
+  <h3>{{ itbaizhan.name }}</h3>
+  <!-- 计算属性，不用加() -->
+  <p>{{ itbaizhanHasContent }}</p>
+  <!-- 函数，加() -->
+  <p>{{ itbaizhanHasContents() }}</p>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      itbaizhan: {
+        name: "百战程序员",
+        content: ["C 语言", "C++", "Java", "Python", "JavaScript", "PHP", "Ruby", "Go", "Rust"],
+      }
+    }
+  },
+  // 计算属性
+  computed: {
+    itbaizhanHasContent() {
+      return this.itbaizhan.content.length > 0 ? "Yes" : "No"
+    }
+  },
+  // 放函数或者方法
+  methods: {
+    itbaizhanHasContents() {
+      return this.itbaizhan.content.length > 0 ? "Yes" : "No"
+    }  
+  }
+}
+</script>
+```
+
+计算属性**缓存** vs 方法
+  计算属性：**计算属性会基于其响应式依赖被缓存**，一个计算属性仅在其响应式依赖更新时才重新计算
+  方法：方法调用**总是**会在重渲染发生时再次执行函数
+
+### 更新中... 上次更新时间：2025-07-29
 
 ---
