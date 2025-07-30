@@ -3247,7 +3247,7 @@ export default {
 
 ### Class 绑定
 
-Vue 专门为`class`的`v-bind`提供了特殊的功能增强，除了字符串外，表达式的值也可以时对象或数组
+Vue 专门为`class`的`v-bind`提供了特殊的功能增强，除了字符串外，表达式的值也可以是对象或数组
 
 - 绑定对象
 
@@ -3312,6 +3312,95 @@ export default {
     return {
       hasError: true,
     };
+  },
+};
+</script>
+```
+
+### Style 绑定
+
+Vue 专门为`style`的`v-bind`提供了特殊功能增强，除了字符串外，表达式的值也可以是对象或数组
+
+- 绑定对象
+
+```vue
+<template>
+  <!-- 可以，但不好 -->
+  <p :class="{ color:'red' }">Style 绑定1</p>
+  <!-- 单对象 -->
+  <p :class="{ color:'activeColor' }">Style 绑定2</p>
+  <!-- 多个对象绑定 -->
+  <p :class="{ color:'activeColor', fontSize:fontsize + 'px' }">Style 绑定3</p>
+  <!-- 多个对象绑定(推荐) -->
+  <p :class="styleObject">Style 绑定4</p>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      activeColor: "red",
+      fontsize: 16,
+      styleObject: { color: "red", fontSize: "16px" },
+    };
+  },
+};
+</script>
+```
+ 
+- 绑定数组
+
+```vue
+<template>
+  <!-- 绑定数组，就加个括号，推荐用对象 -->
+  <p :class="[styleObject]">Style 绑定4</p>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      activeColor: "red",
+      fontsize: 16,
+      styleObject: { color: "red", fontSize: "16px" },
+    };
+  },
+};
+</script>
+```
+
+### 侦听器
+
+使用`watch`选项在每次响应式属性发生变化时触发一个函数
+
+```vue
+<template>
+  <p>{{ message }}</p>
+  <button @click="updateHandle">修改数据</button>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      message: 'Hello, Vue!',
+    }
+  },
+  methods: {
+    updateHandle() {
+      this.message = 'Hello, World!';
+    },
+  },
+  // 侦听器
+  watch: {
+    // newValue 改变之后的数据
+    // oldValue 改变之前的数据
+    // 函数名必须与侦听的数据对象保持一致
+    message(newValue, oldValue) {
+      // 可以添加数据发生，自动执行的函数
+      console.log('newValue:', newValue);
+      console.log('oldValue:', oldValue);
+    },
   },
 };
 </script>
