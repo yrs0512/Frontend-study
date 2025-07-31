@@ -2009,7 +2009,7 @@ var arr = [1, "hello", true, { name: "hello" }];
       div.hasAttribute("class"); // false
       ```
 
-    - Element.removeAttribute()  
+    - Element.removeAttribute()
 
       用于从当前元素节点移除属性
 
@@ -2960,154 +2960,154 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
 
     - 获取`event`对象
 
-    ```vue
-    <template>
-      <button @click="addcount">add</button>
-      <p>{{ count }}</p>
-    </template>
+      ```vue
+      <template>
+        <button @click="addcount">add</button>
+        <p>{{ count }}</p>
+      </template>
 
-    <script>
-    export default {
-      data() {
-        return {
-          count: 0,
-        };
-      },
-      methods: {
-        addcount(e) {
-          this.count++;
-          /**
-           * 获取 event 对象
-           Vue 中的 event 对象，就是原生 JS 的 Event 对象
-           * PointerEvent {isTrusted: true, _vts: 1753781675534, pointerId: 1, width: 1, height: 1, …}
-           */
-          console.log(e);
-          // <button>add</button>
-          console.log(e.target);
+      <script>
+      export default {
+        data() {
+          return {
+            count: 0,
+          };
         },
-      },
-    };
-    </script>
-    ```
+        methods: {
+          addcount(e) {
+            this.count++;
+            /**
+             * 获取 event 对象
+            Vue 中的 event 对象，就是原生 JS 的 Event 对象
+            * PointerEvent {isTrusted: true, _vts: 1753781675534, pointerId: 1, width: 1, height: 1, …}
+            */
+            console.log(e);
+            // <button>add</button>
+            console.log(e.target);
+          },
+        },
+      };
+      </script>
+      ```
 
     - 传递参数
 
-    ```vue
-    <template>
-      <button @click="addcount('hello')">add</button>
-      <p>{{ count }}</p>
-    </template>
+      ```vue
+      <template>
+        <button @click="addcount('hello')">add</button>
+        <p>{{ count }}</p>
+      </template>
 
-    <script>
-    export default {
-      data() {
-        return {
-          count: 0,
-        };
-      },
-      methods: {
-        addcount(msg) {
-          console.log(msg);
-          this.count++;
+      <script>
+      export default {
+        data() {
+          return {
+            count: 0,
+          };
         },
-      },
-    };
-    </script>
-    ```
+        methods: {
+          addcount(msg) {
+            console.log(msg);
+            this.count++;
+          },
+        },
+      };
+      </script>
+      ```
 
     - 获取列表中的内容和`event`(事件传参)
 
-    ```vue
-    <template>
-      <p
-        @click="getNameHandler(item)"
-        v-for="(item, index) of name"
-        :key="index"
-      >
-        {{ item }}
-      </p>
-      <p
-        @click="getNameHandlers(item, $event)"
-        v-for="(item, index) of names"
-        :key="index"
-      >
-        {{ item }}
-      </p>
-    </template>
+      ```vue
+      <template>
+        <p
+          @click="getNameHandler(item)"
+          v-for="(item, index) of name"
+          :key="index"
+        >
+          {{ item }}
+        </p>
+        <p
+          @click="getNameHandlers(item, $event)"
+          v-for="(item, index) of names"
+          :key="index"
+        >
+          {{ item }}
+        </p>
+      </template>
 
-    <script>
-    export default {
-      data() {
-        return {
-          name: ["vue", "react", "angular"],
-          names: ["vue", "react", "angular"],
-        };
-      },
-      methods: {
-        getNameHandler(name) {
-          console.log(name);
+      <script>
+      export default {
+        data() {
+          return {
+            name: ["vue", "react", "angular"],
+            names: ["vue", "react", "angular"],
+          };
         },
-        getNameHandlers(name, e) {
-          console.log(name);
-          console.log(e);
+        methods: {
+          getNameHandler(name) {
+            console.log(name);
+          },
+          getNameHandlers(name, e) {
+            console.log(name);
+            console.log(e);
+          },
         },
-      },
-    };
-    </script>
-    ```
+      };
+      </script>
+      ```
 
   - 事件修饰符
 
     - `.prevent`: 阻止默认行为
 
-    ```vue
-    <template>
-      <!-- 阻止默认事件 -->
-      <a @click.prevent="clickHander" href="https://www.baidu.com">百度</a>
-    </template>
+      ```vue
+      <template>
+        <!-- 阻止默认事件 -->
+        <a @click.prevent="clickHander" href="https://www.baidu.com">百度</a>
+      </template>
 
-    <script>
-    export default {
-      data() {
-        return {};
-      },
-      methods: {
-        clickHander() {
-          // 阻止默认事件后，点击链接不会跳转，与 .prevent 相同
-          // e.preventDefault();
-          console.log("点击了");
+      <script>
+      export default {
+        data() {
+          return {};
         },
-      },
-    };
-    </script>
-    ```
+        methods: {
+          clickHander() {
+            // 阻止默认事件后，点击链接不会跳转，与 .prevent 相同
+            // e.preventDefault();
+            console.log("点击了");
+          },
+        },
+      };
+      </script>
+      ```
 
     - `.stop`: 阻止事件冒泡
 
-    ```vue
-    <template>
-      <!-- 阻止向上冒泡 -->
-      <div @click="clickDiv">
-        <p @click.stop="clickP"></p>
-      </div>
-    </template>
+      ```vue
+      <template>
+        <!-- 阻止向上冒泡 -->
+        <div @click="clickDiv">
+          <p @click.stop="clickP"></p>
+        </div>
+      </template>
 
-    <script>
-    export default {
-      data() {
-        return {};
-      },
-      methods: {
-        clickDiv() {
-          console.log("div clicked");
+      <script>
+      export default {
+        data() {
+          return {};
         },
-        clickP() {
-          console.log("p clicked");
+        methods: {
+          clickDiv() {
+            console.log("div clicked");
+          },
+          clickP() {
+            console.log("p clicked");
+          },
         },
-      },
-    };
-    </script>
-    ```
+      };
+      </script>
+      ```
 
 ### 数组变化侦测
 
@@ -3129,31 +3129,31 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
 
   - `reverse()`
 
-  ```vue
-  <template>
-    <ul>
-      <button @click="addName">add</button>
-      <li v-for="(item, index) of names" :key="index">{{ item }}</li>
-    </ul>
-  </template>
+    ```vue
+    <template>
+      <ul>
+        <button @click="addName">add</button>
+        <li v-for="(item, index) of names" :key="index">{{ item }}</li>
+      </ul>
+    </template>
 
-  <script>
-  export default {
-    data() {
-      return {
-        names: ["Alice", "Bob", "Charlie"],
-      };
-    },
-    methods: {
-      addName() {
-        // 对调用的原数组进行变更
-        // 引起 UI 自动更新
-        this.names.push("Dave");
+    <script>
+    export default {
+      data() {
+        return {
+          names: ["Alice", "Bob", "Charlie"],
+        };
       },
-    },
-  };
-  </script>
-  ```
+      methods: {
+        addName() {
+          // 对调用的原数组进行变更
+          // 引起 UI 自动更新
+          this.names.push("Dave");
+        },
+      },
+    };
+    </script>
+    ```
 
 - 替换一个数组
 
@@ -3165,31 +3165,31 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
 
   - `slice()`
 
-  ```vue
-  <template>
-    <ul>
-      <button @click="addName">add</button>
-      <li v-for="(item, index) of names" :key="index">{{ item }}</li>
-    </ul>
-  </template>
+    ```vue
+    <template>
+      <ul>
+        <button @click="addName">add</button>
+        <li v-for="(item, index) of names" :key="index">{{ item }}</li>
+      </ul>
+    </template>
 
-  <script>
-  export default {
-    data() {
-      return {
-        names: ["Alice", "Bob", "Charlie"],
-      };
-    },
-    methods: {
-      addName() {
-        // 赋值返回
-        // 不会引起 UI 自动更新
-        this.names = this.names.concat("Dave");
+    <script>
+    export default {
+      data() {
+        return {
+          names: ["Alice", "Bob", "Charlie"],
+        };
       },
-    },
-  };
-  </script>
-  ```
+      methods: {
+        addName() {
+          // 赋值返回
+          // 不会引起 UI 自动更新
+          this.names = this.names.concat("Dave");
+        },
+      },
+    };
+    </script>
+    ```
 
 ### 计算属性
 
@@ -3251,71 +3251,71 @@ Vue 专门为`class`的`v-bind`提供了特殊的功能增强，除了字符串�
 
 - 绑定对象
 
-```vue
-<template>
-  <!-- 可单个对象和多个对象 -->
-  <p :class="{ active: isActice, 'text-danger': hasError }">Class 样式绑定</p>
-  <!-- 多个对象绑定(更好) -->
-  <p :class="classObject">Class 样式绑定</p>
-</template>
+  ```vue
+  <template>
+    <!-- 可单个对象和多个对象 -->
+    <p :class="{ active: isActice, 'text-danger': hasError }">Class 样式绑定</p>
+    <!-- 多个对象绑定(更好) -->
+    <p :class="classObject">Class 样式绑定</p>
+  </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isActice: true,
-      hasError: true,
-      classObject: { active: true, "text-danger": false },
-    };
-  },
-};
-</script>
-```
+  <script>
+  export default {
+    data() {
+      return {
+        isActice: true,
+        hasError: true,
+        classObject: { active: true, "text-danger": false },
+      };
+    },
+  };
+  </script>
+  ```
 
 - 绑定数组
 
-```vue
-<template>
-  <p :class="[arrtext, arrError]">Class 样式绑定1</p>
-  <p :class="[arrActive]">Class 样式绑定2</p>
-  <!-- 数组三元运算符，''不添加 -->
-  <p :class="[isActice ? 'active' : '']">Class 样式绑定3</p>
-</template>
+  ```vue
+  <template>
+    <p :class="[arrtext, arrError]">Class 样式绑定1</p>
+    <p :class="[arrActive]">Class 样式绑定2</p>
+    <!-- 数组三元运算符，''不添加 -->
+    <p :class="[isActice ? 'active' : '']">Class 样式绑定3</p>
+  </template>
 
-<script>
-export default {
-  data() {
-    return {
-      arrtext: "active",
-      arrError: "text-danger",
-      arrActive: ["active", "text-danger"],
-    };
-  },
-};
-</script>
-```
+  <script>
+  export default {
+    data() {
+      return {
+        arrtext: "active",
+        arrError: "text-danger",
+        arrActive: ["active", "text-danger"],
+      };
+    },
+  };
+  </script>
+  ```
 
 - 数组和对象
 
   数组和对象嵌套过程中，只能是数组嵌套对象，不能但反道而行
 
-```vue
-<template>
-  <p :class="[isActice ? 'active' : '', { 'text-danger': hasError }]">
-    Class 样式绑定1
-  </p>
-</template>
+  ```vue
+  <template>
+    <p :class="[isActice ? 'active' : '', { 'text-danger': hasError }]">
+      Class 样式绑定1
+    </p>
+  </template>
 
-<script>
-export default {
-  data() {
-    return {
-      hasError: true,
-    };
-  },
-};
-</script>
-```
+  <script>
+  export default {
+    data() {
+      return {
+        hasError: true,
+      };
+    },
+  };
+  </script>
+  ```
 
 ### Style 绑定
 
@@ -3323,51 +3323,53 @@ Vue 专门为`style`的`v-bind`提供了特殊功能增强，除了字符串外�
 
 - 绑定对象
 
-```vue
-<template>
-  <!-- 可以，但不好 -->
-  <p :class="{ color:'red' }">Style 绑定1</p>
-  <!-- 单对象 -->
-  <p :class="{ color:'activeColor' }">Style 绑定2</p>
-  <!-- 多个对象绑定 -->
-  <p :class="{ color:'activeColor', fontSize:fontsize + 'px' }">Style 绑定3</p>
-  <!-- 多个对象绑定(推荐) -->
-  <p :class="styleObject">Style 绑定4</p>
-</template>
+  ```vue
+  <template>
+    <!-- 可以，但不好 -->
+    <p :class="{ color: 'red' }">Style 绑定1</p>
+    <!-- 单对象 -->
+    <p :class="{ color: 'activeColor' }">Style 绑定2</p>
+    <!-- 多个对象绑定 -->
+    <p :class="{ color: 'activeColor', fontSize: fontsize + 'px' }">
+      Style 绑定3
+    </p>
+    <!-- 多个对象绑定(推荐) -->
+    <p :class="styleObject">Style 绑定4</p>
+  </template>
 
-<script>
-export default {
-  data() {
-    return {
-      activeColor: "red",
-      fontsize: 16,
-      styleObject: { color: "red", fontSize: "16px" },
-    };
-  },
-};
-</script>
-```
- 
+  <script>
+  export default {
+    data() {
+      return {
+        activeColor: "red",
+        fontsize: 16,
+        styleObject: { color: "red", fontSize: "16px" },
+      };
+    },
+  };
+  </script>
+  ```
+
 - 绑定数组
 
-```vue
-<template>
-  <!-- 绑定数组，就加个括号，推荐用对象 -->
-  <p :class="[styleObject]">Style 绑定4</p>
-</template>
+  ```vue
+  <template>
+    <!-- 绑定数组，就加个括号，推荐用对象 -->
+    <p :class="[styleObject]">Style 绑定4</p>
+  </template>
 
-<script>
-export default {
-  data() {
-    return {
-      activeColor: "red",
-      fontsize: 16,
-      styleObject: { color: "red", fontSize: "16px" },
-    };
-  },
-};
-</script>
-```
+  <script>
+  export default {
+    data() {
+      return {
+        activeColor: "red",
+        fontsize: 16,
+        styleObject: { color: "red", fontSize: "16px" },
+      };
+    },
+  };
+  </script>
+  ```
 
 ### 侦听器
 
@@ -3383,12 +3385,12 @@ export default {
 export default {
   data() {
     return {
-      message: 'Hello, Vue!',
-    }
+      message: "Hello, Vue!",
+    };
   },
   methods: {
     updateHandle() {
-      this.message = 'Hello, World!';
+      this.message = "Hello, World!";
     },
   },
   // 侦听器
@@ -3398,14 +3400,445 @@ export default {
     // 函数名必须与侦听的数据对象保持一致
     message(newValue, oldValue) {
       // 可以添加数据发生，自动执行的函数
-      console.log('newValue:', newValue);
-      console.log('oldValue:', oldValue);
+      console.log("newValue:", newValue);
+      console.log("oldValue:", oldValue);
     },
   },
 };
 </script>
 ```
 
-### 更新中... 上次更新时间：2025-07-29
+### 表单的输入绑定
+
+- `v-model`
+
+  ```vue
+  <template>
+    <form>
+      <!-- message 可以实时获取输入的值 -->
+      <input type="text" v-model="message" />
+      <p>{{ message }}</p>
+      <!-- 单一的复选框，绑定布尔类型值 -->
+      <input type="checkbox" id="checkbox" v-model="checked" />
+      <label for="checkbox">{{ checked }}</label>
+    </form>
+  </template>
+
+  <script>
+  export default {
+    data() {
+      return {
+        message: "",
+        checked: false,
+      };
+    },
+  };
+  </script>
+  ```
+
+- 修饰符
+
+  - `.lazy`
+
+    只有当输入框失去焦点或者回车时，才会触发输入事件
+
+    ```vue
+    <template>
+      <form>
+        <!-- 输入框失去焦点或者回车才会获取输入值-->
+        <input type="text" v-model.lazy="message" />
+        <p>{{ message }}</p>
+      </form>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          message: "",
+        };
+      },
+    };
+    </script>
+    ```
+
+  - `.number`
+
+    只接收数值，并返回一个数值类型
+
+  - `.trim`
+
+    去除输入框首尾空格
+
+### 模板引用
+
+- `ref`
+
+  获取组件中的元素和组件实例(获取 DOM 操作)
+
+  ```vue
+  <template>
+    <!-- 使用 ref，获取元素 -->
+    <div ref="container" class="container">{{ message }}</div>
+    <input type="text" ref="input" />
+    <button @click="getDiv">获取元素</button>
+  </template>
+
+  <script>
+  /**
+   * 内容改变：{{ 模板语法}}
+   * 属性改变：v-bind: 指令
+   * 事件：v-on: click
+   *
+   * 如果没有特殊的需求，不要操作 DOM，消耗性能
+   */
+  export default {
+    data() {
+      return {
+        message: "Hello",
+      };
+    },
+    methods: {
+      getDiv() {
+        /**
+         * this.$refs 读取 ref
+         *  container 与 ref="container" 相同
+         * 得到：<div class="container">Hello</div>
+         */
+        console.log(this.$refs.container);
+        /**
+         * 改变值
+         * innerHTML:原生 JS 的属性
+         */
+        console.log((this.$refs.container.innerHTML = "World"));
+        // 获取 input 输入的值
+        console.log(this.$refs.input.value);
+      },
+    },
+  };
+  </script>
+  ```
+
+### 组件
+
+组件是可复用的 Vue 实例，具有自己的模板、逻辑和样式。它们可以嵌套使用，形成组件树，最大的优势就是可复用性<br>
+当使用构建步骤时，一般会将**Vue 组件**定义在一个单独的`.vue`文件中，这被叫做单文件组件(简称 SFC)
+
+- 组件组成
+
+  - 组件组成结构
+
+    ```vue
+    <template>
+      <div>承载标签</div>
+    </template>
+
+    <script>
+    export default {};
+    </script>
+
+    <style scoped></style>
+    ```
+
+  - 组件引用
+
+    ```vue
+    <template>
+      <!-- 第三步：显示组件 -->
+      <MyComponent />
+      <!-- 也可以 my-component，不推荐 -->
+    </template>
+
+    <script>
+    /**
+     *  第一步：引入组件
+     *  import MyComponent from './components/MyComponent.vue';
+     */
+    import 组件名称 from "组件路径";
+
+    export default {
+      // 第二步：注入组件
+      components: {
+        // 组件名称 MyComponent
+        组件名称,
+      },
+    };
+    </script>
+
+    <style scoped></style>
+    ```
+
+  - `scoped`
+
+    作用域样式，作用域样式只对当前组件有效，不会影响其他组件
+
+    ```vue
+    <!-- 生效作用域，只在当前组件内生效 -->
+    <style scoped></style>
+    ```
+
+- 组件嵌套关系
+
+  组件允许我们将 UI 划分为独立的、可复用的部分，并且可以对每个部分进行单独的思考。在实际应用中，组件常常被组织成层层嵌套的树状结构
+
+  ```vue
+  <!-- Aside 组件 引入 Item 组件 -->
+  <template>
+    <item />
+  </template>
+
+  <script>
+  import item from "./item.vue";
+
+  export default {
+    components: {
+      item,
+    },
+  };
+  </script>
+
+  <style scoped></style>
+
+  <!-- 根组件(App.vue) 引入 Aside 组件 -->
+  <template>
+    <Aside />
+  </template>
+
+  <script>
+  import Aside from "./pages/Aside.vue";
+
+  export default {
+    components: {
+      Aside,
+    },
+  };
+  </script>
+
+  <style scoped></style>
+  ```
+
+- 组件全局注册
+
+  一个 Vue 组件在使用前需要先被"注册"，这样 Vue 才能渲染模板时找到其对应的实现，有两种方式：全局注册和局部注册
+
+  - 全局注册
+
+    ```js
+    import { createApp } from "vue";
+    import App from "./App.vue";
+    // 组件注册
+    import Aside from "./pages/Aside.vue";
+
+    const app = createApp(App);
+
+    // 必须在这中间写组建的注册
+
+    // 全局注册，前面是给组件取的名，后面是组件
+    app.component("Aside", Aside);
+
+    app.mount("#app");
+    ```
+
+    全局注册问题
+
+    1. 并没有被使用的组件无法在生产打包时被自动移除(也叫"tree-shaking")，如果你全局注册了一个组件，即使并没有被实际使用，仍然会出现在打包的 JS 文件中
+    2. 依赖关系不明确，在父组件中使用子组件时，不容易定位子组件的实现，影响长期的可维护性
+
+  - 局部注册使用`components`(三步注册)
+
+- 组件传递数据
+
+  组件与组件之间不是完全独立的，而是有交集的，那就是组件与组件之间是可以传递数据的<br>
+  传递数据的解决方案就是`props`
+
+  ```vue
+  <!-- 父组件 -->
+  <template>
+    <h3>Parent</h3>
+    <Child title="Panrent数据" demo="测试" />
+    <!-- 动态数据传递 -->
+    <Child :titles="message" />
+  </template>
+
+  <script>
+  import Child from "./Child.vue";
+  export default {
+    data() {
+      return {
+        // 与上面的保持一致
+        message: "Parent数据",
+      };
+    },
+    components: {
+      Child,
+    },
+  };
+  </script>
+
+  <!-- 子组件 -->
+  <template>
+    <h3>Child</h3>
+    <p>{{ title }}</p>
+    <p>{{ demo }}</p>
+    <!-- 动态数据传递 -->
+    <p>{{ title }}</p>
+  </template>
+
+  <script>
+  export default {
+    data() {
+      return {};
+    },
+    props: ["title", "demo"],
+  };
+  </script>
+  ```
+
+  - 注意事项
+
+    `props`传递数据，只能从父级传递到子级，不能反其道而行
+
+  - 传递多种数据类型
+
+    除了字符串类型数据，也可以传递其他类型，如：数字、对象、数组等<br>
+    实际上**任何**类型 的值都可以作为`props`的值被传递
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+    <!-- 字符串 -->
+    <Child :title="title">
+    <!-- 数字 -->
+    <Child :num="num">
+    <!-- 对象 -->
+    <Child :obj="obj">
+    <!-- 数组 -->
+    <Child :names="names">
+    </template>
+
+    <script>
+    import Child from "./Child.vue";
+    export default {
+      data() {
+        return {
+          title: "hello world",
+          num: 123,
+          obj: {
+            name: "张三",
+            age: 18
+          },
+          names: ["张三", "李四", "王五"]
+        };
+      },
+      components: {
+        Child,
+      },
+    };
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+    <!-- 字符串 -->
+    <h1>{{ title }}</h1>
+    <!-- 数字 -->
+    <p>{{ num }}</p>
+    <!-- 对象 -->
+    <p>{{ obj.name }}</p>
+    <p>{{ obj.age }}</p>
+    <!-- 数组 -->
+    <ul>
+      <li v-for="(item, index) of names" :key="index">{{ item }}</li>
+    </ul>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {};
+      },
+      props: ["title", "num", "obj", "names"],
+    };
+    </script>
+    ```
+
+  - 组件传递`props`校验
+
+    Vue 组件可以声明对传入的`props`的校验要求
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+    <!-- 字符串 -->
+    <Child :title="title">
+    </template>
+
+    <script>
+    import Child from "./Child.vue";
+    export default {
+      data() {
+        return {
+          title: "hello world",
+        };
+      },
+      components: {
+        Child,
+      },
+    };
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+    <!-- 字符串 -->
+    <h1>{{ title }}</h1>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {};
+      },
+      props: {
+        // 要求传入的字段是字符串
+        title: {
+          type: String,
+          // 多个要求都可以
+          type: [String, Number, Array, Object],
+        },
+        // 默认值
+        age: {
+          type: Number,
+          // 设置默认值
+          default: 18
+        },
+        // 数字和字符串可以直接 default，但是如果是数组和对象，必须通过工厂函数返回默认值
+        names: {
+          type: Array,
+          // 默认值设置为函数
+          default() {
+            return ["空"];
+          }
+        },
+        // 必选项
+        sex: {
+          type: String,
+          // 必选项，必须传，否则警告
+          required: true
+        }，
+      },
+      methods: {
+        // props 是只读的!!!
+        changeName() {
+          /**
+           *  会报错!!!
+           *  错误操作，不允许修改父元素传递过来的数据
+           */
+          this.title = "changeName";
+        }
+      }
+    };
+    </script>
+    ```
+
+### 更新中... 上次更新时间：2025-08-01
 
 ---
