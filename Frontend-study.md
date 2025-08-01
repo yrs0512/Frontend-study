@@ -3681,7 +3681,7 @@ export default {
     <p>{{ title }}</p>
     <p>{{ demo }}</p>
     <!-- 动态数据传递 -->
-    <p>{{ title }}</p>
+    <p>{{ titles }}</p>
   </template>
 
   <script>
@@ -3689,7 +3689,7 @@ export default {
     data() {
       return {};
     },
-    props: ["title", "demo"],
+    props: ["title", "demo", "titles"],
   };
   </script>
   ```
@@ -3706,14 +3706,14 @@ export default {
     ```vue
     <!-- 父组件 -->
     <template>
-    <!-- 字符串 -->
-    <Child :title="title">
-    <!-- 数字 -->
-    <Child :num="num">
-    <!-- 对象 -->
-    <Child :obj="obj">
-    <!-- 数组 -->
-    <Child :names="names">
+      <!-- 字符串 -->
+      <Child :title="title" />
+      <!-- 数字 -->
+      <Child :num="num" />
+      <!-- 对象 -->
+      <Child :obj="obj" />
+      <!-- 数组 -->
+      <Child :names="names" />
     </template>
 
     <script>
@@ -3725,9 +3725,9 @@ export default {
           num: 123,
           obj: {
             name: "张三",
-            age: 18
+            age: 18,
           },
-          names: ["张三", "李四", "王五"]
+          names: ["张三", "李四", "王五"],
         };
       },
       components: {
@@ -3738,17 +3738,17 @@ export default {
 
     <!-- 子组件 -->
     <template>
-    <!-- 字符串 -->
-    <h1>{{ title }}</h1>
-    <!-- 数字 -->
-    <p>{{ num }}</p>
-    <!-- 对象 -->
-    <p>{{ obj.name }}</p>
-    <p>{{ obj.age }}</p>
-    <!-- 数组 -->
-    <ul>
-      <li v-for="(item, index) of names" :key="index">{{ item }}</li>
-    </ul>
+      <!-- 字符串 -->
+      <h1>{{ title }}</h1>
+      <!-- 数字 -->
+      <p>{{ num }}</p>
+      <!-- 对象 -->
+      <p>{{ obj.name }}</p>
+      <p>{{ obj.age }}</p>
+      <!-- 数组 -->
+      <ul>
+        <li v-for="(item, index) of names" :key="index">{{ item }}</li>
+      </ul>
     </template>
 
     <script>
@@ -3768,8 +3768,8 @@ export default {
     ```vue
     <!-- 父组件 -->
     <template>
-    <!-- 字符串 -->
-    <Child :title="title">
+      <!-- 字符串 -->
+      <Child :title="title" />
     </template>
 
     <script>
@@ -3788,8 +3788,8 @@ export default {
 
     <!-- 子组件 -->
     <template>
-    <!-- 字符串 -->
-    <h1>{{ title }}</h1>
+      <!-- 字符串 -->
+      <h1>{{ title }}</h1>
     </template>
 
     <script>
@@ -3838,6 +3838,194 @@ export default {
     };
     </script>
     ```
+
+  - `props`也可以子传父
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+      <h3>Nain</h3>
+      <Child :onEvent="dataFn" />
+      <p>父组件接收数据：{{ message }}</p>
+    </template>
+
+    <script>
+    import Child from "./Child.vue";
+    export default {
+      data() {
+        return {
+          message: "",
+        };
+      },
+      components: {
+        Child,
+      },
+      methods: {
+        dataFn(data) {
+          this.message = data;
+        },
+      },
+    };
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+      <h3>Child</h3>
+      <p>{{ onEvent("Child传递数据") }}</p>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {};
+      },
+      props: {
+        onEvent: Function,
+      },
+    };
+    </script>
+    ```
+
+- 组件事件
+
+  直接使用`$emit`方法触发自定义事件<br>
+  触发自定义事件的目的是组件之间传递数据
+
+  ```vue
+  <!-- 父组件 -->
+  <template>
+    <h3>组件事件</h3>
+    <!-- 子组件自定义事件 -->
+    <Child @someEvent="getHandle" />
+    <p>父元素:{{ message }}</p>
+  </template>
+
+  <script>
+  import Child from "./Child.vue";
+  export default {
+    data() {
+      return {
+        message: "",
+      };
+    },
+    components: {
+      Child,
+    },
+    methods: {
+      // 事件执行的函数：获取子组件传递的数据
+      getHandle(data) {
+        this.message = data;
+      },
+    },
+  };
+  </script>
+
+  <!-- 子组件 -->
+  <template>
+    <h3>Child</h3>
+    <button @click="clickEventHandle">Child传递数据</button>
+  </template>
+
+  <script>
+  export default {
+    data() {
+      return {
+        message: "这是子组件的数据",
+      };
+    },
+    methods: {
+      // 自定义事件，父组件可以使用该事件
+      clickEventHandle() {
+        // 第一个参数是自定义事件名称，第二个参数是事件参数
+        this.$emit("someEvent", this.message);
+      },
+    },
+  };
+  </script>
+  ```
+
+  - 注意事项
+
+    组件之前传递数据的方案：
+
+    1. 父组件向子组件传递数据`props`
+    2. 子组件向父组件传递数据`$emit`
+
+  - 组件事件配合`v-model`使用
+
+    在获取数据的同时，发送数据配合`v-model`来使用
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+      <h3>Main</h3>
+      <SearchComponent @search="getText" />
+      <p>父组件获取数据：{{ message }}</p>
+    </template>
+
+    <script>
+    import SearchComponent from "./SearchComponent.vue";
+
+    export default {
+      components: {
+        SearchComponent,
+      },
+      data() {
+        return {
+          message: "",
+        };
+      },
+      methods: {
+        getText(data) {
+          this.message = data;
+        },
+      },
+    };
+    </script>
+
+    <!-- 子组件 -->
+    <template>搜索：<input type="text" v-model="searchText" /></template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          searchText: "",
+        };
+      },
+      // 侦听器
+      watch: {
+        searchText(newValue, oldValue) {
+          this.$emit("search", newValue);
+        },
+      },
+    };
+    </script>
+    ```
+
+- 插槽`slot`
+
+  `slot`元素是一个**插槽出口**，标示了父元素提供的**插槽内容**将在哪里被渲染，用于接收模板内容(HTML 元素)
+
+  ```vue
+  <!-- 父组件 -->
+  <template>
+  <!-- 显示子组件改为<Child></Child> -->
+    <Child>
+      <!-- 模板内容 -->
+      <div>
+        <p>插槽内容</p>
+      </div>
+    </Child>  
+  </template>  
+
+  <!-- 子组件 -->
+  <template>
+  <p>插槽</p>
+  <!-- 插槽内容，插槽出口 -->
+  <slot></slot>
+  </template>
+  ```
 
 ### 更新中... 上次更新时间：2025-08-01
 
