@@ -3486,7 +3486,7 @@ export default {
 
   <script>
   /**
-   * 内容改变：{{ 模板语法}}
+   * 内容改变：{{ 模板语法 }}
    * 属性改变：v-bind: 指令
    * 事件：v-on: click
    *
@@ -4010,23 +4010,240 @@ export default {
   ```vue
   <!-- 父组件 -->
   <template>
-  <!-- 显示子组件改为<Child></Child> -->
+    <!-- 显示子组件改为<Child></Child> -->
     <Child>
       <!-- 模板内容 -->
       <div>
         <p>插槽内容</p>
       </div>
-    </Child>  
-  </template>  
+    </Child>
+  </template>
 
   <!-- 子组件 -->
   <template>
-  <p>插槽</p>
-  <!-- 插槽内容，插槽出口 -->
-  <slot></slot>
+    <p>插槽</p>
+    <!-- 插槽内容，插槽出口 -->
+    <slot></slot>
   </template>
   ```
 
-### 更新中... 上次更新时间：2025-08-01
+  - 渲染作用域
+
+    插槽内容可以访问到父组件的数据作用域，因为插槽内容本身是在父组件模板中定义的
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+      <Child>
+        <!-- 访问父组件数据作用域，子组件也可以显示 -->
+        <h3>{{ message }}</h3>
+      </Child>
+    </template>
+
+    <script>
+    import Child from "./Child.vue";
+    export default {
+      data() {
+        return {
+          message: "hello world",
+        };
+      },
+      components: {
+        Child,
+      },
+    };
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+      <p>插槽</p>
+      <!-- 插槽内容，插槽出口 -->
+      <slot></slot>
+    </template>
+    ```
+
+  - 默认内容
+
+    在外部没有提供任何内容的情况下，可以为插槽提供默认内容
+
+    ```vue
+    <!-- 子组件 -->
+    <template>
+      <p>插槽</p>
+      <!-- 设置默认内容，如果父组件没有传值，显示默认内容 -->
+      <slot>插槽默认值</slot>
+    </template>
+    ```
+
+  - 具名插槽
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+      <Child>
+        <template v-slot:header>
+          <h1>插槽</h1>
+        </template>
+        <!-- 也可以使用 #main 代替 -->
+        <template #main>
+          <p>插槽内容</p>
+        </template>
+      </Child>
+    </template>
+
+    <script>
+    import Child from "./Child.vue";
+    export default {
+      data() {
+        return {};
+      },
+      components: {
+        Child,
+      },
+    };
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+      <p>插槽</p>
+      <!-- 插槽内容，插槽出口 -->
+      <slot name="header">插槽默认值</slot>
+      <hr />
+      <slot name="main">插槽默认值</slot>
+    </template>
+    ```
+
+  - 同时使用父组件域内和子组件域内的数据
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+      <!-- 同时使用 -->
+      <Child v-slot="slotProps">
+        <h3>{{ message }} - {{ slotProps.msg }}</h3>
+      </Child>
+      <!-- 在具名插槽中使用 -->
+      <template #header="slotProps">
+        <h3>{{ message }} - {{ slotProps.msg }}</h3>
+      </template>
+      <template #main="slotProps">
+        <p>{{ slotProps.job }}</p>
+      </template>
+    </template>
+
+    <script>
+    import Child1 from "./Child1.vue";
+    import Child from "./Child.vue";
+    export default {
+      data() {
+        return {
+          message: "hello world",
+        };
+      },
+      components: {
+        Child,
+        Child1,
+      },
+    };
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+      <p>插槽</p>
+      <!-- 使用子组件域内数据 -->
+      <slot :msg="childMessage"></slot>
+      <!-- 具名插槽 -->
+      <slot name="header" :msg="childMessage"></slot>
+      <slot name="main" :job="jobMessage"></slot>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          childMessage: "子组件数据",
+          jobMessage: "软件工程师",
+        };
+      },
+    };
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+      <p>插槽</p>
+      <!-- 使用子组件域内数据 -->
+      <slot :msg="child1Message"></slot>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          child1Message: "子组件1数据",
+        };
+      },
+    };
+    </script>
+    ```
+
+- 组件生命周期
+
+  组件生命周期是指组件从创建到销毁的整个过程，在不同的阶段会触发特定的生命周期钩子函数
+
+  ```vue
+  <template>
+    <h3>组件生命周期</h3>
+    <p>{{ message }}</p>
+    <button @click="changeMessage">改变数据</button>
+  </template>
+  
+  <script>
+  /**
+   * 生命周期函数
+   *     创建期：beforeCreate created
+   *     挂载期：beforeMount mounted
+   *     更新期：beforeUpdate updated
+   *     销毁期：beforeUnmount unmounted
+   */
+  export default {
+    data() {
+      return {
+        message: "更新之前"
+      };
+    },
+    methods: {
+      changeMessage() {
+        this.message = "更新之后";
+      }
+    }
+    beforeCreate() {
+      console.log("组件创建之前");
+    }，
+    created() {
+      console.log("组件创建之后");
+    },
+    beforeMount() {
+      console.log("组件渲染之前");
+    },
+    mounted() {
+      console.log("组件渲染之后");
+    },
+    beforeUpdate() {
+      console.log("组件更新之前");
+    },
+    updated() {
+      console.log("组件更新之后");
+    },
+    beforeUnmount() {
+      console.log("组件销毁之前");
+    },
+    unmounted() {
+      console.log("组件销毁之后");
+    }
+  };
+  </script>
+  ```
+
+### 更新中... 上次更新时间：2025-08-03
 
 ---
