@@ -2460,9 +2460,17 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
 
 ### Vue API 风格
 
-选项式 API (Vue2)
+- 选项式 API (Vue2)
 
-组合式 API (Vue3)
+  1. 在 vue2.x 项目中使用的就是 选项式 API 写法
+  2. 优点：易于学习和使用，写代码的位置已经约定好了
+  3. 缺点：代码组织性差，相似的逻辑代码不便于复用，逻辑复杂代码多了不好阅读
+
+- 组合式 API (Vue3)
+
+  1. 在 vue3 中使用的就是 组合式 API 写法
+  2. 优点：功能逻辑复杂繁多情况下，各个功能逻辑代码组织在一起，便于阅读和维护
+  3. 缺点：需要有良好的代码组织能力和拆分逻辑能力
 
 ### Vue 创建项目
 
@@ -4196,7 +4204,7 @@ export default {
     <p>{{ message }}</p>
     <button @click="changeMessage">改变数据</button>
   </template>
-  
+
   <script>
   /**
    * 生命周期函数
@@ -4244,6 +4252,786 @@ export default {
   </script>
   ```
 
-### 更新中... 上次更新时间：2025-08-03
+- 动态组件
+
+  在两个组件间来回切换，比如 Tab 界面
+
+  ```vue
+  <template>
+    <!-- 使用 is 实现组件切换 -->
+    <component :is="tabComponent"></component>
+    <button @click="changeHandle">切换组件</button>
+  </template>
+
+  <script>
+  import componentA from "./components/componentA.vue";
+  import componentB from "./components/componentB.vue";
+  export default {
+    data() {
+      return {
+        // 最先显示的组件，字符串
+        tabComponent: "componentA",
+      };
+    },
+    components: {
+      componentA,
+      componentB,
+    },
+    methods: {
+      changeHandle() {
+        // 切换组件
+        this.tabComponent =
+          this.tabComponent === "componentA" ? "componentB" : "componentA";
+      },
+    },
+  };
+  </script>
+  ```
+
+- 组件保持存活
+
+  当使用`<conponent :is="...">`在多个组件间切换时，被切换掉的组件会被卸载，我们可以通过`<keep-alive>`组件强制被切换的组件仍然保持"存活"的状态
+
+  ```vue
+  <template>
+    <!-- 在这之间的组件不会进入销毁期，而是继续存在 -->
+    <keep-alive>
+      <component :is="tabComponent"></component>
+    </keep-alive>
+    <button @click="changeHandle">切换组件</button>
+  </template>
+
+  <script>
+  import componentA from "./components/componentA.vue";
+  import componentB from "./components/componentB.vue";
+  export default {
+    data() {
+      return {
+        // 最先显示的组件，字符串
+        tabComponent: "componentA",
+      };
+    },
+    components: {
+      componentA,
+      componentB,
+    },
+    methods: {
+      changeHandle() {
+        // 切换组件
+        this.tabComponent =
+          this.tabComponent === "componentA" ? "componentB" : "componentA";
+      },
+    },
+  };
+  </script>
+  ```
+
+- 异步组件
+
+  在大型项目中，我们可能需要拆分应用为更小的块，并**仅在需要时**再从服务器加载相关组件，Vue 提供了`defineAsyncComponent`方法来实现此功能(需要时加载)
+
+  ```vue
+  <template>
+    <keep-alive>
+      <component :is="tabComponent"></component>
+    </keep-alive>
+    <button @click="changeHandle">切换组件</button>
+  </template>
+
+  <script>
+  // 从 Vue 中引入 defineAsyncComponent
+  import { defineAsyncComponent } from "vue";
+  import componentA from "./components/componentA.vue";
+  // 正常直接加载
+  // import componentB from "./components/componentB.vue";
+  // 异步加载组件
+  const ComponentB = defineAsyncComponent(() =>
+    import("./components/componentB.vue")
+  );
+  export default {
+    data() {
+      return {
+        // 最先显示的组件，字符串
+        tabComponent: "componentA",
+      };
+    },
+    components: {
+      componentA,
+      componentB,
+    },
+    methods: {
+      changeHandle() {
+        // 切换组件
+        this.tabComponent =
+          this.tabComponent === "componentA" ? "componentB" : "componentA";
+      },
+    },
+  };
+  </script>
+  ```
+
+- 依赖注入
+
+  在多层级嵌套的组件，不好使用`props`传递数据，这一问题被称为"props 逐级透传"，`provide`和`inject`可以解决这个问题，一个父组件相对于所有后代组件，会作为**依赖提供者**
+
+  ```vue
+  <!-- 父组件 -->
+  <template>
+    <h3>Parent</h3>
+    <Child />
+  </template>
+
+  <script>
+  import Child from "./Child.vue";
+  export default {
+    provide: {
+      title: "祖先的数据",
+    },
+    components: {
+      Child,
+    },
+  };
+  </script>
+
+  <!-- 后代组件 -->
+  <template>
+    <h3>Child</h3>
+    <p>{{ title }}</p>
+  </template>
+
+  <script>
+  export default {
+    inject: ["title"],
+  };
+  </script>
+  ```
+
+  也可以从`data`中读取数据
+
+  ```js
+  export default {
+    data() {
+      return {
+        message: "祖先的数据",
+      };
+    },
+    provide() {
+      // 使用函数的形式，可以访问到 this
+      return {
+        title: this.message,
+      };
+    },
+    components: {
+      Child,
+    },
+  };
+  ```
+
+  除了在一个组件中提供依赖，也可以在整个应用层面提供依赖
+
+  ```js
+  // 在 main.js 中(全局变量)
+  import { createApp } from "vue";
+  import App from "./App.vue";
+  const app = createApp(App);
+  app.provide(/* 注入名 */ "title", /* 值(数据) */ "祖先的数据");
+  app.mount("#app");
+  // 在任意地方都可以用 inject 获取
+  ```
+
+  `inject`注入，注入会在组件自身的状态**之前**被解析，因此可以在`data()`中访问到注入的数据
+
+  ```js
+  export default {
+    inject: ["title"],
+    data() {
+      return {
+        // 基于注入值的初始数据
+        message: this.title,
+      };
+    },
+  };
+  ```
+
+  温馨提示：`provide`和`inject`只能由上到下的传递，不能反向传递
+
+### Vue 应用
+
+- 应用实例
+
+  每个 Vue 应用都是通过`createApp`函数创建一个新的**应用实例**
+
+  ```js
+  // main.js
+  import { createApp } from "vue";
+
+  const app = createApp({
+    /* 根组件 */
+  });
+
+  // 示例
+  import App from "./App.vue";
+
+  // app：Vue 的实例对象
+  // 在一个 Vue 项目中，有且只有一个 Vue 实例对象
+  // App：根组件
+  const app = createApp(App);
+
+  app.mount("#app");
+  ```
+
+- 挂载应用
+
+  应用实例必须在调用了`.mount()`方法后才会渲染出来，该方案接收一个"容器"参数，可以是一个实际的 DOM 元素或是一个 CSS 选择器字符串
+
+  ```js
+  // main.js
+  app.mount("#app");
+  ```
+
+  ```html
+  <!-- index.html -->
+  <!-- 
+      浏览器可执行文件：
+        1. HTML
+        2. CSS
+        3. JS
+        4. Image
+  
+      构建工具：vite Webpack  
+   -->
+  <div id="app"></div>
+  ```
+
+- 公共资源
+
+  在`src`目录下的`assets`文件夹的作用就是存放公共资源，例如：图片、公共 CSS 或者字体图标等
+
+### 组合式 API
+
+- 响应式
+
+  - 选项式 API\_响应式
+
+    ```vue
+    <template>
+      <h3>选项式API</h3>
+      <p>{{ message }}</p>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          message: "选项式API 绑定数据",
+        };
+      },
+    };
+    </script>
+    ```
+
+  - 组合式 API\_响应式
+
+    ```vue
+    <template>
+      <h3>组合式API</h3>
+      <p>{{ message }}</p>
+      <p>{{ userInfo.name }}</p>
+    </template>
+
+    <script>
+    import { ref, reactive } from "vue";
+
+    // 优势：组合式和选项式可以共存
+    // 温馨提示：组合式和选项式可以共存，但是不建议共存写法!!!
+
+    export default {
+      // 组合式API 的关键字 setup
+      /**
+       * ref：基本类型的响应式数据：String  Number  Boolean
+       * reactive：引用类型的响应式数据：Array  Object
+       */
+      setup() {
+        const message = ref("组合式API 绑定数据");
+        const userInfo = reactive({
+          name: "张三",
+          age: 18,
+        });
+
+        // 外部想访问，必须 return 出去才可以
+        return {
+          message,
+          userInfo,
+        };
+      },
+    };
+    </script>
+    ```
+
+  - 简约组合式 API
+
+    ```vue
+    <template>
+      <h3>组合式API-简约写法</h3>
+      <p>{{ message }}</p>
+      <p>{{ userInfo.name }}</p>
+    </template>
+
+    <script setup>
+    import { ref, reactive } from "vue";
+    const message = ref("组合式API-简约-绑定数据");
+    const userInfo = reactive({
+      name: "张三",
+      age: 18,
+    });
+    </script>
+    ```
+
+- 计算属性
+
+  - 选项式 API\_计算属性
+
+    ```vue
+    <template>
+      <h3>选项式API</h3>
+      <p>{{ message }}</p>
+      <p>{{ reverse }}</p>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          message: "选项式API 绑定数据",
+        };
+      },
+      // 计算属性
+      computed: {
+        reverse() {
+          return this.message.split("").reverse().join("");
+        },
+      },
+    };
+    </script>
+    ```
+
+  - 组合式 API\_计算属性
+
+    ```vue
+    <template>
+      <h3>组合式API</h3>
+      <p>{{ message }}</p>
+      <p>{{ reverse }}</p>
+    </template>
+
+    <script setup>
+    // Vue3 的优势：在打包的时候，Vue2 所有内容都会打包，Vue3 只把使用到的功能打包
+    // Vue3 的打包会让程序变得更小
+    import { ref, reverse } from "vue";
+
+    const message = ref("组合式API-简约-绑定数据");
+
+    const reverse = computed(() => {
+      // 注意：message 在逻辑里面读取的时候(script)，必须通过.value 读取到值
+      return message.value.split("").reverse().join("");
+    });
+    </script>
+    ```
+
+- 事件处理
+
+  - 选项式 API\_事件处理
+
+    ```vue
+    <template>
+      <h3>选项式API</h3>
+      <p>{{ count }}</p>
+      <button @click="addCountHandle">增加</button>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          count: 0,
+        };
+      },
+      methods: {
+        addCountHandle() {
+          this.count++;
+        },
+      },
+    };
+    </script>
+    ```
+
+  - 组合式 API\_事件处理
+
+    ```vue
+    <template>
+      <h3>组合式API</h3>
+      <p>{{ count }}</p>
+      <button @click="addCountHandle">增加</button>
+    </template>
+
+    <script setup>
+    import { ref } from "vue";
+
+    const count = ref(0);
+
+    function addCountHandle() {
+      // .value 是读取 ref 数据的
+      count.value++;
+    }
+    </script>
+    ```
+
+- 侦听器
+
+  - 选项式 API\_侦听器
+
+    ```vue
+    <template>
+      <h3>选项式API</h3>
+      <p>{{ count }}</p>
+      <button @click="addCountHandle">增加</button>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          count: 0,
+        };
+      },
+      methods: {
+        addCountHandle() {
+          this.count++;
+        },
+      },
+      watch: {
+        count(newValue, oldValue) {
+          console.log(newValue, oldValue);
+        },
+      },
+    };
+    </script>
+    ```
+
+  - 组合式 API\_侦听器
+
+    ```vue
+    <template>
+      <h3>组合式API</h3>
+      <p>{{ count }}</p>
+      <button @click="addCountHandle">增加</button>
+    </template>
+
+    <script setup>
+    import { ref, watch } from "vue";
+    // 引入外部方法
+    import { watchCount } from "../utils/countUtil.js";
+
+    const count = ref(0);
+
+    function addCountHandle() {
+      // .value 是读取 ref 数据的
+      count.value++;
+    }
+    // 参数1：代表侦听的数据
+    watch(count, (newValue, oldValue) => {
+      console.log(newValue, oldValue);
+    });
+
+    // 外部方法(对应下方)
+    watchCount(count);
+    </script>
+    ```
+
+  - 提取到独立文件
+
+    ```js
+    // utils/countUtil.js
+    import { watch } from "vue";
+
+    export function watchCount(count) {
+      watch(count, (newValue, oldValue) => {
+        console.log(newValue, oldValue);
+      });
+    }
+    ```
+
+- 生命周期
+
+  - 选项式 API\_生命周期
+
+    ```vue
+    <template>
+      <h3>选项式API</h3>
+      <p>{{ message }}</p>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          message: "hello world",
+        };
+      },
+      mounted() {
+        console.log("渲染之后1");
+      },
+      // 第二个生命周期函数覆盖了第一个
+      mounted() {
+        console.log("渲染之后2");
+      },
+      // 只打印"渲染之后2"
+    };
+    </script>
+    ```
+
+  - 组合式 API\_事件处理
+
+    ```vue
+    <template>
+      <h3>组合式API</h3>
+      <p>{{ message }}</p>
+    </template>
+
+    <script setup>
+    // 需要哪个生命周期函数就引入哪个
+    import { ref, onMounted } from "vue";
+
+    const message = ref("Hello World");
+
+    // 每个生命周期函数方法都可以独立的处理一个业务
+    onMounted(() => {
+      console.log("渲染之后1");
+    });
+    onMounted(() => {
+      console.log("渲染之后2");
+    });
+    // 打印"渲染之后1"和"渲染之后2"
+    </script>
+    ```
+
+- 模板引用
+
+  - 选项式 API\_模板应用
+
+    ```vue
+    <template>
+      <h3>选项式API</h3>
+      <p ref="message">选项式API-模板引用</p>
+    </template>
+
+    <script>
+    export default {
+      mounted() {
+        // innerHTML 是 JS 对象
+        this.$refs.message.innerHTML = "选项式API-模板引用-修改";
+      },
+    };
+    </script>
+    ```
+
+  - 组合式 API\_事件处理
+
+    ```vue
+    <template>
+      <h3>组合式API</h3>
+      <p ref="message">组合式API-模板引用</p>
+    </template>
+
+    <script setup>
+    import { ref, onMounted } from "vue";
+    // 声明一个 ref 来存放该元素的引用，必须和模板里的 ref 同名
+    const message = ref(null);
+
+    // 不能放在最外层，因为在 DOM 还没有渲染的时候，这里的代码就已经执行了
+    // 必须保证 DOM 渲染完成之后再去读取 DOM
+    message.value.innerHTML = "组合式API-模板引用-修改"; // 错误
+
+    onMounted(() => {
+      message.value.innerHTML = "组合式API-模板引用-修改";
+    });
+    </script>
+    ```
+
+- `Props`
+
+  - 选项式 API_Props
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+      <h3>Parent</h3>
+      <Child title="父组件数据" />
+    </template>
+
+    <script>
+    import Child from "./Child.vue";
+    export default {
+      components: {
+        Child,
+      },
+    };
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+      <h3>Child</h3>
+      <p>{{ title }}</p>
+    </template>
+
+    <script>
+    export default {
+      props: {
+        title: {
+          type: String,
+          default: "子组件数据",
+        },
+      },
+    };
+    </script>
+    ```
+
+  - 组合式 API_Props
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+      <h3>Parent</h3>
+      <Child title="父组件数据" :age="age" />
+    </template>
+
+    <script setup>
+    import Child from "./Child.vue";
+    import { ref } from "vue";
+    const age = ref(18);
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+      <h3>Child</h3>
+      <p>{{ title }}</p>
+      <p>{{ age }}</p>
+    </template>
+
+    <script>
+    // props 名字任意
+    const props = defineProps({
+      title: {
+        type: String,
+        default: "",
+      },
+      age: {
+        type: Number,
+        default: 0,
+      },
+    });
+
+    // 可以访问 props 对象 {title: "父组件数据", age: 18}
+    console.log(props);
+    // 父组件数据 18
+    console.log(props.title, props.age);
+    </script>
+    ```
+
+- 事件
+
+  - 选项式 API\_组件
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+      <h3>Parent</h3>
+      <Child @onSomeEvent="getMessageHandle" />
+      <p>{{ message }}</p>
+    </template>
+
+    <script>
+    import Child from "./Child.vue";
+    export default {
+      data() {
+        return {
+          message: "",
+        };
+      },
+      components: {
+        Child,
+      },
+      methods: {
+        getMessageHandle(data) {
+          this.message = data;
+        },
+      },
+    };
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+      <h3>Child</h3>
+      <button @click="sendMessageHandle">传递数据</button>
+    </template>
+
+    <script>
+    export default {
+      data() {
+        return {
+          message: "子组件数据",
+        };
+      },
+      methods: {
+        sendMessageHandle() {
+          // 对应父组件方法的参数
+          this.$emit("onSomeEvent", this.message);
+        },
+      },
+    };
+    </script>
+    ```
+
+  - 组合式 API_Props
+
+    ```vue
+    <!-- 父组件 -->
+    <template>
+      <h3>Parent</h3>
+      <Child @onSomeEvent="getMessageHandle"/>
+      <p>{{ message }}</p>
+    </template>
+
+    <script setup>
+    import { ref } from 'vue'
+    const message = ref('')
+
+    import Child from "./Child.vue";
+    function getMessageHandle(data) {
+      message.value = data
+    }
+    </script>
+
+    <!-- 子组件 -->
+    <template>
+      <h3>Child</h3>
+      <button @click="sendMessageHandle">传递数据</button>
+    </template>
+
+    <script>
+    import { ref } from "vue";
+    const message = ref("子组件数据");
+
+    // emit 名字任意
+    // defineEmits 参数数组可以定义多个事件
+    const emit = defineEmits(["onSomeEvent"]);
+
+    function sendMessageHandle() {
+      emit("onSomeEvent", message.value);
+    }
+    </script>
+    ```
+
+### 更新中... 上次更新时间：2025-08-04
 
 ---
