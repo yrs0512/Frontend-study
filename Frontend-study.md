@@ -1,4 +1,4 @@
-# <center style="color: #087aedff">_前端学习_</center>
+# <span style="color: #087aedff">前端学习</span>
 
 ---
 
@@ -4998,17 +4998,17 @@ export default {
     <!-- 父组件 -->
     <template>
       <h3>Parent</h3>
-      <Child @onSomeEvent="getMessageHandle"/>
+      <Child @onSomeEvent="getMessageHandle" />
       <p>{{ message }}</p>
     </template>
 
     <script setup>
-    import { ref } from 'vue'
-    const message = ref('')
+    import { ref } from "vue";
+    const message = ref("");
 
     import Child from "./Child.vue";
     function getMessageHandle(data) {
-      message.value = data
+      message.value = data;
     }
     </script>
 
@@ -5032,6 +5032,192 @@ export default {
     </script>
     ```
 
-### 更新中... 上次更新时间：2025-08-04
+- 自定义指令
+
+  - 选项式 API\_自定义指令
+
+    ```vue
+    <template>
+      <h3>选项式API</h3>
+      <p v-author>前端学习</p>
+    </template>
+
+    <script>
+    export default {
+      // 自定义指令
+      directives: {
+        author: {
+          mounted(element) {
+            element.innerHTML = element.innerHTML + "yrs0512";
+          },
+        },
+      },
+    };
+    </script>
+    ```
+
+  - 组合式 API\_自定义指令
+
+    ```vue
+    <template>
+      <h3>组合式API</h3>
+      <p v-author>前端学习</p>
+    </template>
+
+    <script setup>
+    const vAuthor = {
+      mounted: (element) => {
+        element.innerHTML = element.innerHTML + "yrs0512";
+      },
+    };
+    </script>
+    ```
+
+- 全局与局部自定义指令
+
+  - 局部自定义指令
+
+    ```vue
+    <template>
+      <h3>局部自定义指令</h3>
+      <p v-red>测试数据</p>
+    </template>
+
+    <script setup>
+    const vRed = {
+      mounted(element) {
+        element.style.color = "red";
+      },
+    };
+    </script>
+    ```
+
+  - 全局自定义指令
+
+    ```js
+    // main.js
+    import { createApp } from "vue";
+    import App from "./App.vue";
+
+    const app = createApp(App);
+
+    // 全局自定义指令
+    app.directive("blue", {
+      mounted(element) {
+        element.style.color = "blue";
+      },
+    });
+
+    app.mount("#app");
+    // 在所有地方都可以使用 v-blue
+    ```
+
+- 自定义指令钩子函数
+
+  - 钩子函数
+
+    ```vue
+    <template>
+      <h3>自定义指令</h3>
+      <p v-red v-if="flag">{{ msg }}</p>
+      <button @click="updateHandler">修改数据</button>
+      <button @click="delHandler">删除元素</button>
+    </template>
+
+    <script setup>
+    import { ref } from 'vue'
+    const msg = ref("红色效果")
+    const flag = ref(true)
+    function updateHandler() {
+      msg.value = "修改的红色效果"
+    }
+    function delHandler() {
+      flag.value = false
+    }
+    const vRed = {
+      // 在绑定元素的 attribute 前
+      // 或事件监听器应用前调用
+      created() {
+        console.log('created');
+      },
+      // 在元素被插入到 DOM 前调用
+      beforeMount() {
+        console.log('beforeMount');
+      },
+      // 在绑定元素的父组件
+      // 及他自己的所有子节点都挂载完成后调用
+      mounted() {
+        console.log('mounted');
+      }
+      // 绑定元素的父组件更新前调用
+      beforeUpdate() {
+        console.log('beforeUpdate');
+      }
+      // 在绑定元素的父组件
+      // 及他自己的所有子节点都更新后调用
+      updated() {
+        console.log('updated');
+      }
+      // 绑定元素的父组件卸载前调用
+      beforeUnmount() {
+        console.log('beforeUnmount');
+      }
+      // 绑定元素的父组件卸载后调用
+      unmounted() {
+        console.log('unmounted');
+      }
+     }
+    </script>
+    ```
+
+  - 自定义指令钩子函数参数
+
+    - `el`: 指令所绑定的元素，可以用来直接操作 DOM
+
+    - `binding`：绑定对象，包含以下属性：
+
+      - `value`：传递给指令的值，例如`v-my-directive="1 + 1"`中，值为`2`
+
+      - `oldValue`：指令绑定的前一个值，仅在 `beforeUpdate` 和 `updated` 钩子中可用
+
+      - `arg`：指令的参数，例如`v-my-directive:foo="flag"`中，参数为`foo`
+
+      - `modifiers`：指令修饰符，例如`v-my-directive.foo.bar="flag"`中，修饰符为`{ foo: true, bar: true }`
+
+      - `instance`：使用该指令的组件实例
+
+      - `dir`：指令对象，可以访问指令的选项
+
+    - `vnode`：代表绑定元素的底层 VNode
+
+    - `preNode`：之前的渲染中代表指所绑定元素的 VNode，仅在`beforeUpdate`和`updated`钩子中可用
+
+    ```vue
+    <template>
+      <h3>自定义钩子</h3>
+      <p v-myShow="flag">{{ msg }}</p>
+      <button @click="updateHandler">切换</button>
+    </template>
+
+    <script setup>
+    import { ref } from "vue";
+
+    const msg = ref("模拟 v-show 指令");
+    const flag = ref(true);
+
+    function updateHandler() {
+      flag.value = flag.value === true ? false : true;
+    }
+
+    // 模拟 v-show 指令
+    const vMyShow = {
+      updated(el, binding) {
+        el.style.display = flag.value === true ? "block" : "none";
+      },
+    };
+    </script>
+    ```
+
+### 更新中... 上次更新时间：2025-08-05
 
 ---
