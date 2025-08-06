@@ -2483,7 +2483,7 @@ Vue 是一个用于构建用户界面的渐进式 JavaScript 框架，易学易�
 2. 创建 Vue 项目
 
    ```bash
-   npm init vue@latest
+   npm init vue@latest  # vite 创建项目
    ```
 
 3. 运行 Vue 项目
@@ -5219,5 +5219,121 @@ export default {
     ```
 
 ### 更新中... 上次更新时间：2025-08-05
+
+---
+
+## <span style="color: #00aaffff">六. Vue 项目</span>
+
+### backstage-management (后台管理)
+
+#### 项目启动和路由搭建
+
+1. 创建项目
+
+```bash
+npm create vite@latest backstage-management -- --template vue
+```
+
+2. 安装依赖包
+
+```bash
+npm install less vue-router element-plus -s
+```
+
+```bash
+npm install @element-plus/icons-vue -s
+```
+
+3. 添加别名
+
+```js
+// 在 vite.config.js 文件中
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [vue()],
+  // 这个 resolve 是添加的别名
+  resolve: {
+    alias: [
+      {
+        find: "@",
+        replacement: "/src",
+      },
+    ],
+  },
+});
+```
+
+4. 设置路由
+
+```js
+// index.js
+import { createRouter, createWebHashHistory } from "vue-router"
+
+// 指定路由规则
+
+const routes = [
+    {
+        path:'/',
+        name:'main',
+        component: () => import('@/views/Main.vue'),
+    }
+]
+
+const router = createRouter({
+    // 设置路由的模式
+    history: createWebHashHistory(),
+    routes,
+});
+
+export default router;
+```
+
+```js
+// 在 main.js 中引入
+// 自动引入， ./router 就行
+import router from './router'
+```
+
+```js
+// 在 main.js 中使用
+// 挂载路由
+const app = createApp(App)
+app.use(router)
+app.mount('#app')
+```
+
+5. 使用 element-plus
+
+自动导入
+
+```bash
+npm install -D unplugin-vue-components unplugin-auto-import
+```
+
+```js
+// 然后把下列代码插入到你的 Vite 的配置文件中
+import { defineConfig } from 'vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+export default defineConfig({
+  // ...
+  plugins: [
+    // ...
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
+})
+```
+
+### 更新中... 上次更新时间：2025-08-06
 
 ---
