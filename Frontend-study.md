@@ -5315,6 +5315,7 @@ npm install -D unplugin-vue-components unplugin-auto-import
 
 ```js
 // 然后把下列代码插入到你的 Vite 的配置文件中
+// vite.config.js
 import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -5334,6 +5335,34 @@ export default defineConfig({
 })
 ```
 
-### 更新中... 上次更新时间：2025-08-06
+6. 注册图标
+
+```js
+// main.ts
+
+// 如果您正在使用CDN引入，请删除下面一行。
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+
+const app = createApp(App)
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
+```
+
+7. 创建 CommonAside 组件
+
+```js
+// filter(): 数组方法，筛选符合条件的元素
+// !item.children: 筛选条件，选择没有 children 属性的对象
+const noChildren = computed(() => list.value.filter(item => !item.children))
+```
+
+8. 创建 CommonHeader 组件
+
+9. 引入 pinia，实现菜单收缩
+
+10. 首页卡片
+
+### 更新中... 上次更新时间：2025-08-07
 
 ---
