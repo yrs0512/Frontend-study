@@ -14,6 +14,11 @@ const routes = [
         name: "home",          // 子路由名称
         component: () => import("@/views/Home.vue"), // 子组件（动态导入）
       },
+      {
+        path: "user",          // 子路径（相对路径）
+        name: "user",          // 子路由名称
+        component: () => import("@/views/User.vue"), // 子组件（动态导入）
+      },
     ],
   },
 ];
