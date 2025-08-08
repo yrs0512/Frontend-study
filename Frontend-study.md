@@ -5270,22 +5270,22 @@ export default defineConfig({
 
 ```js
 // index.js
-import { createRouter, createWebHashHistory } from "vue-router"
+import { createRouter, createWebHashHistory } from "vue-router";
 
 // 指定路由规则
 
 const routes = [
-    {
-        path:'/',
-        name:'main',
-        component: () => import('@/views/Main.vue'),
-    }
-]
+  {
+    path: "/",
+    name: "main",
+    component: () => import("@/views/Main.vue"),
+  },
+];
 
 const router = createRouter({
-    // 设置路由的模式
-    history: createWebHashHistory(),
-    routes,
+  // 设置路由的模式
+  history: createWebHashHistory(),
+  routes,
 });
 
 export default router;
@@ -5294,15 +5294,15 @@ export default router;
 ```js
 // 在 main.js 中引入
 // 自动引入， ./router 就行
-import router from './router'
+import router from "./router";
 ```
 
 ```js
 // 在 main.js 中使用
 // 挂载路由
-const app = createApp(App)
-app.use(router)
-app.mount('#app')
+const app = createApp(App);
+app.use(router);
+app.mount("#app");
 ```
 
 5. 使用 element-plus
@@ -5316,10 +5316,10 @@ npm install -D unplugin-vue-components unplugin-auto-import
 ```js
 // 然后把下列代码插入到你的 Vite 的配置文件中
 // vite.config.js
-import { defineConfig } from 'vite'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { defineConfig } from "vite";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
 export default defineConfig({
   // ...
@@ -5332,7 +5332,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     }),
   ],
-})
+});
 ```
 
 6. 注册图标
@@ -5341,11 +5341,11 @@ export default defineConfig({
 // main.ts
 
 // 如果您正在使用CDN引入，请删除下面一行。
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
-const app = createApp(App)
+const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-  app.component(key, component)
+  app.component(key, component);
 }
 ```
 
@@ -5354,7 +5354,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 ```js
 // filter(): 数组方法，筛选符合条件的元素
 // !item.children: 筛选条件，选择没有 children 属性的对象
-const noChildren = computed(() => list.value.filter(item => !item.children))
+const noChildren = computed(() => list.value.filter((item) => !item.children));
 ```
 
 8. 创建 CommonHeader 组件
@@ -5362,6 +5362,18 @@ const noChildren = computed(() => list.value.filter(item => !item.children))
 9. 引入 pinia，实现菜单收缩
 
 10. 首页卡片
+
+11. 引入 axios
+
+12. 引入 mock，拦截请求
+
+13. 首页 count
+
+14. 引入 echarts
+
+15. 图表
+
+16. 用户组件
 
 ### 更新中... 上次更新时间：2025-08-07
 
