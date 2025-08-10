@@ -1,6 +1,26 @@
-<!-- header 组件 -->
+<script setup>
+// 导入依赖
+import { useAllDataStore } from '@/stores';
+
+// 根据传入的用户名动态生成图片资源的 URL
+const getImageUrl = (user) => {
+    return new URL(`../assets/images/${user}.png`, import.meta.url).href
+}
+
+// 获取 Store 实例
+const store = useAllDataStore()
+
+// 状态修改方法
+// Vue3 箭头函数，直接访问组件实例
+const collapseHandle = () => {
+    store.state.isCollapse = !store.state.isCollapse
+}
+</script>
+
+<!-- 页面头部组件 -->
 <template>
   <div class="header">
+
     <!-- 左侧内容 -->
     <div class="l-content">
         <!-- 会生成一个小型按钮，按钮内部显示一个 menu 图标（假设已注册或全局可用） -->
@@ -9,6 +29,7 @@
             <!-- 动态组件 <component>：Vue 的特殊组件，用于动态渲染其他组件 -->
             <component class="icons" is="menu"></component>
         </el-button>
+
         <!-- 面包屑 -->
          <!-- separator="/"：指定面包屑项之间的分隔符为斜杠 / -->
         <el-breadcrumb separator="/" class="bread">
@@ -16,6 +37,7 @@
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
+
     <!-- 右侧内容 -->
     <div class="r-content">
         <!-- 下拉菜单 -->
@@ -38,23 +60,10 @@
                     <el-dropdown-item>退出</el-dropdown-item>
                 </el-dropdown-menu>
             </template>
-        </el-dropdown>        
+        </el-dropdown>   
     </div>
   </div>
 </template>
-
-<script setup>
-import { useAllDataStore } from '@/stores';
-// 根据传入的用户名动态生成图片资源的 URL
-const getImageUrl = (user) => {
-    return new URL(`../assets/images/${user}.png`, import.meta.url).href
-}
-const store = useAllDataStore()
-// Vue3 箭头函数，直接访问组件实例
-const collapseHandle = () => {
-    store.state.isCollapse = !store.state.isCollapse
-}
-</script>
 
 <style scoped lang="less">
 .header {

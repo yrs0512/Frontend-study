@@ -1,7 +1,11 @@
+/**
+ *  createWebHashHistory：创建基于 hash 模式的路由历史记录
+ *  Hash 模式：URL 中会带有 #（如 http://example.com/#/home
+ * 特点：不需要服务器端配置，适合纯静态部署
+ */
 import { createRouter, createWebHashHistory } from "vue-router";
 
 // 指定路由规则
-
 const routes = [
   {
     path: "/",                 // 根路径
@@ -23,10 +27,12 @@ const routes = [
   },
 ];
 
+// 创建路由实例
 const router = createRouter({
   // 设置路由的模式
-  history: createWebHashHistory(),
-  routes,
+  history: createWebHashHistory(), // 使用 hash 模式
+  routes,                        // 传入路由配置
 });
 
+// 导出路由实例
 export default router;

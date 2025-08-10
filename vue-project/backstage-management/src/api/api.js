@@ -1,9 +1,12 @@
 /**
  * 整个项目 api 的统一管理
+ * 通过调用 $api 使用
+ * 
+ * api 调用 request(参考config，配置url)
+ * mock 拦截 url，返回mockData
+ * 返回的数据为样例 
  */
 import request from "./request";
-
-// 请求首页左侧的表格的数据
 
 export default {
   getTableData() {
@@ -42,6 +45,13 @@ export default {
   addUser(data) {
     return request({
       url: "/user/addUser",
+      method: "post",
+      data,
+    });
+  },  
+  editUser(data) {
+    return request({
+      url: "/user/editUser",
       method: "post",
       data,
     });

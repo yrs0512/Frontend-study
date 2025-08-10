@@ -1,5 +1,5 @@
 <script setup>
-import { ref, getCurrentInstance, onMounted, reactive } from 'vue'
+import { ref, getCurrentInstance, onMounted, reactive, nextTick } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 const handleClick = () => {
   console.log('click')
@@ -13,7 +13,7 @@ const getUserData = async () => {
   let data = await proxy.$api.getUserData(config)
   tableData.value = data.list.map(item => ({
     ...item,
-    sexLabel: item.sex === 1 ? '男' : '女'
+    sexLabel: item.sex === '1' ? '男' : '女'
   }))
   config.total = data.count
 }
@@ -115,15 +115,16 @@ const timeFormat = (time) => {
 const onSubmit = () => {
   // 先要检验
   proxy.$refs['userForm'].validate(async (vaild) => {
-    if(vaild) {
+    if (vaild) {
       let res = null;
       formUser.birth = /^\d{4}-\d{2}-\d{2}$/.test(formUser.birth) ? formUser.birth :
-      timeFormat(formUser.birth)
-      if(action.value === 'add') {
-        console.log(formUser);
+        timeFormat(formUser.birth)
+      if (action.value === 'add') {
         res = await proxy.$api.addUser(formUser)
+      }else{
+        res = await proxy.$api.editUser(formUser)
       }
-      if(res) {
+      if (res) {
         dialogVisible.value = false
         proxy.$refs['userForm'].resetFields()
         getUserData()
@@ -136,6 +137,14 @@ const onSubmit = () => {
         type: 'error'
       })
     }
+  })
+}
+const handleEdit = (val) => {
+  action.value = 'edit'
+  dialogVisible.value = true
+  // 重要
+  nextTick(() => {
+   Object.assign(formUser, { ...val, sex: '' + val.sex })
   })
 }
 onMounted(() => {
@@ -161,7 +170,7 @@ onMounted(() => {
         :prop="item.prop" :label="item.label" />
       <el-table-column fixed="right" label="Operations" min-width="120">
         <template #="scope">
-          <el-button type="primary" size="small" @click="handleClick">
+          <el-button type="primary" size="small" @click="handleEdit(scope.row)">
             编辑
           </el-button>
           <el-button type="danger" size="small" @click="handleDelete(scope.row)">删除</el-button>

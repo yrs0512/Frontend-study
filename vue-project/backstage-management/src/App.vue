@@ -1,8 +1,8 @@
 <script setup>
-
 </script>
 
 <template>
+  <!-- 会根据路由配置动态渲染不同的页面组件，如:Main.vue -->
   <router-view></router-view>
 </template>
 

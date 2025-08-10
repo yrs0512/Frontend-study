@@ -1,5 +1,7 @@
 // 获取当前环境 import.meta.env.MODE --dev
 const env = import.meta.env.MODE || "prod";
+
+// 环境配置对象
 const EnvConfig = {
     // 开发环境
     development: {
@@ -19,8 +21,7 @@ const EnvConfig = {
 };
 
 export default {
-    env,
-    ...EnvConfig[env],
-    // mock
-    mock: false,
+    env,  // 当前环境标识
+    ...EnvConfig[env],  // 展开当前环境对应的配置
+    mock: false,  // 全局 mock 开关，默认关闭
 }
