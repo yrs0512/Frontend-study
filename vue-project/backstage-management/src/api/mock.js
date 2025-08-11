@@ -4,7 +4,7 @@ import Mock from 'mockjs'
 // 通常包含 getTableData 方法或属性，用于返回模拟的表格数据
 import homeApi from "./mockData/home"
 import userApi from "./mockData/user"
-
+import menuApi from "./mockData/permission"
 // Mock 数据配置
 // 1. 拦截的路径 2. 方法 3. 制造出的假数据
 // /api\/home\/getTableData/ 这是一个正则表达式，匹配请求的 URL
@@ -16,3 +16,4 @@ Mock.mock(/api\/home\/getUserData/, "get", userApi.getUserList);
 Mock.mock(/api\/user\/deleteUser/, "get", userApi.deleteUser);
 Mock.mock(/api\/user\/addUser/, "post", userApi.createUser);
 Mock.mock(/api\/user\/editUser/, "post", userApi.updateUser);
+Mock.mock(/api\/permission\/getMenu/, "post", menuApi.getMenu);

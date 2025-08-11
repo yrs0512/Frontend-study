@@ -1,6 +1,7 @@
 <script setup>
 import CommonAside from "@/components/CommonAside.vue"
 import CommonHeader from "@/components/CommonHeader.vue"
+import CommonTab from "@/components/CommonTab.vue"
 </script>
 
 <template>
@@ -16,6 +17,7 @@ import CommonHeader from "@/components/CommonHeader.vue"
         </el-header>
         
         <!-- 主内容区 -->
+        <common-tab />
         <el-main class="right-main">
           <!-- 当访问不同路由时，<router-view> 会自动替换为路由配置中对应的组件内容 -->
           <router-view></router-view>

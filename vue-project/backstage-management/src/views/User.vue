@@ -1,22 +1,13 @@
 <script setup>
+
+// 导入组件
 import { ref, getCurrentInstance, onMounted, reactive, nextTick } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-const handleClick = () => {
-  console.log('click')
-}
 
+// 表格数据
 const tableData = ref([])
 
-// getCurrentInstance() 返回当前 Vue 组件的实例对象
-const { proxy } = getCurrentInstance()
-const getUserData = async () => {
-  let data = await proxy.$api.getUserData(config)
-  tableData.value = data.list.map(item => ({
-    ...item,
-    sexLabel: item.sex === '1' ? '男' : '女'
-  }))
-  config.total = data.count
-}
+// 表格列配置
 const tableLabel = reactive([
   {
     prop: 'name',
@@ -42,6 +33,7 @@ const tableLabel = reactive([
   },
 ])
 
+// 搜索表单和分页配置
 const formInline = reactive({
   keyWord: ''
 })
@@ -51,16 +43,36 @@ const config = reactive({
   page: 1,
 })
 
+// 获取组件实例和用户数据
+// getCurrentInstance() 返回当前 Vue 组件的实例对象
+const { proxy } = getCurrentInstance()
+
+// 获取用户数据
+const getUserData = async () => {
+  let data = await proxy.$api.getUserData(config)
+  tableData.value = data.list.map(item => ({
+    ...item,
+    sexLabel: item.sex === '1' ? '男' : '女'
+  }))
+  config.total = data.count
+}
+
+// 基础函数
+const handleClick = () => {
+  console.log('click')
+}
+
+// 搜索和分页处理
 const handleSearch = () => {
   config.name = formInline.keyWord
   getUserData()
 }
-
 const handleChange = (page) => {
   config.page = page,
     getUserData()
 }
 
+// 删除用户
 const handleDelete = (val) => {
   // proxy.$api
   ElMessageBox.confirm("你确定要删除吗？").then(async () => {
@@ -73,11 +85,18 @@ const handleDelete = (val) => {
     getUserData()
   })
 }
+
+// 表示新增或编辑的操作
 const action = ref('add')
+
+// 控制对话框显示
 const dialogVisible = ref(false)
+
+// 表单数据对象，默认性别为 '1'（男）
 const formUser = reactive({
   sex: '1',
 })
+
 //表单校验规则
 const rules = reactive({
   name: [{ required: true, message: "姓名是必填项", trigger: "blur" }],
@@ -89,6 +108,8 @@ const rules = reactive({
   birth: [{ required: true, message: "出生日期是必选项" }],
   addr: [{ required: true, message: '地址是必填项' }]
 })
+
+// 对话框关闭和取消
 const handleClose = () => {
   // 获取表单重置表单
   dialogVisible.value = false;
@@ -98,10 +119,14 @@ const handleCancel = () => {
   dialogVisible.value = false;
   proxy.$refs['userForm'].resetFields()
 }
+
+// 添加操作
 const handleAdd = () => {
   dialogVisible.value = true;
   action.value = 'add'
 }
+
+// 时间格式化函数
 const timeFormat = (time) => {
   var time = new Date(time)
   var year = time.getFullYear()
@@ -112,6 +137,8 @@ const timeFormat = (time) => {
   }
   return year + '-' + add(month) + '-' + add(date)
 }
+
+// 表单提交
 const onSubmit = () => {
   // 先要检验
   proxy.$refs['userForm'].validate(async (vaild) => {
@@ -130,7 +157,6 @@ const onSubmit = () => {
         getUserData()
       }
     } else {
-
       ElMessage({
         showClose: true,
         message: '请输入正确的内容',
@@ -139,6 +165,8 @@ const onSubmit = () => {
     }
   })
 }
+
+// 编辑操作
 const handleEdit = (val) => {
   action.value = 'edit'
   dialogVisible.value = true
@@ -147,12 +175,15 @@ const handleEdit = (val) => {
    Object.assign(formUser, { ...val, sex: '' + val.sex })
   })
 }
+
+// 在组件挂载时获取用户数据
 onMounted(() => {
   getUserData()
 })
 </script>
 
 <template>
+  <!-- 顶部操作区域 -->
   <div class="user-header">
     <el-button type="primary" @click="handleAdd">新增</el-button>
     <el-form :inline="true" :model="formInline">
@@ -164,6 +195,8 @@ onMounted(() => {
       </el-form-item>
     </el-form>
   </div>
+
+  <!-- 表格展示区域 -->
   <div class="table">
     <el-table :data="tableData" style="width: 100%">
       <el-table-column v-for="item of tableLabel" :key="item.prop" :width="item.width ? item.width : 125"
@@ -177,14 +210,18 @@ onMounted(() => {
         </template>
       </el-table-column>
     </el-table>
+    <!-- 分页组件 -->
     <el-pagination class="pager" background layout="prev, pager, next" size="small" :total="config.total"
       @current-change="handleChange" />
   </div>
+
+  <!-- 表单对话框 -->
   <el-dialog v-model="dialogVisible" :title="action == 'add' ? '新增用户' : '编辑用户'" width="35%" :before-close="handleClose">
     <!--需要注意的是设置了:inline="true"，
 		会对el-select的样式造成影响，我们通过给他设置一个class=select-clearn
 		在css进行处理-->
     <el-form :inline="true" :model="formUser" :rules="rules" ref="userForm">
+      <!-- 第一行：姓名和年龄 -->
       <el-row>
         <el-col :span="12">
           <el-form-item label="姓名" prop="name">
@@ -197,6 +234,7 @@ onMounted(() => {
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 第二行：性别和出生日期 -->
       <el-row>
         <el-col :span="12">
           <el-form-item class="select-clearn" label="性别" prop="sex">
@@ -212,11 +250,13 @@ onMounted(() => {
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 地址 -->
       <el-row>
         <el-form-item label="地址" prop="addr">
           <el-input v-model="formUser.addr" placeholder="请输入地址" />
         </el-form-item>
       </el-row>
+      <!-- 操作按钮 -->
       <el-row style="justify-content: flex-end">
         <el-form-item>
           <el-button type="primary" @click="handleCancel">取消</el-button>
