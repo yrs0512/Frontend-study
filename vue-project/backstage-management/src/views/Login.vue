@@ -14,8 +14,8 @@ const handleLogin = async () => {
     // 拿到菜单以后
     store.updateMenuList(res.menuList)
     store.state.token = res.token
-    router.push('/home')
     store.addMenu(router)
+    router.push('/home')
 }
 </script>
 

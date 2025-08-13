@@ -11,7 +11,7 @@ const routes = [
     path: "/", // 根路径
     name: "main", // 路由名称
     component: () => import("@/views/Main.vue"), // 根组件（动态导入）
-    redirect: "/home", // 自动重定向到/home
+    redirect: "/login", // 自动重定向到/home
     children: [
       // 嵌套子路由
       {
@@ -35,6 +35,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: () => import("@/views/Login.vue"),
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: () => import("@/views/404.vue"),
   },
 ];
 

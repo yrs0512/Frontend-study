@@ -1,6 +1,7 @@
 <script setup>
 // 导入依赖
 import { useAllDataStore } from '@/stores';
+import { useRouter } from 'vue-router';
 
 // 根据传入的用户名动态生成图片资源的 URL
 const getImageUrl = (user) => {
@@ -14,6 +15,13 @@ const store = useAllDataStore()
 // Vue3 箭头函数，直接访问组件实例
 const collapseHandle = () => {
     store.state.isCollapse = !store.state.isCollapse
+}
+
+const router = useRouter()
+
+const handleLoginOut = () => {
+    store.clean()
+    router.push('/login') // 跳转到登录页面
 }
 </script>
 
@@ -57,7 +65,7 @@ const collapseHandle = () => {
                 <el-dropdown-menu>
                     <!-- 单个菜单项，点击可触发操作 -->
                     <el-dropdown-item>个人中心</el-dropdown-item>
-                    <el-dropdown-item>退出</el-dropdown-item>
+                    <el-dropdown-item @click="handleLoginOut">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </template>
         </el-dropdown>   

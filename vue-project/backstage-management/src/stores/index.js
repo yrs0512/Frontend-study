@@ -1,6 +1,6 @@
 // 导入依赖
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 // 初始化状态函数
 function initState() {
@@ -30,6 +30,13 @@ export const useAllDataStore = defineStore("allData", () => {
   // ref 包裹，成为响应式
   const state = ref(initState());
 
+  watch(state, (newObj) => {
+    if(!newObj.token) return;
+    localStorage.setItem("store", JSON.stringify(newObj));
+  },
+  { deep: true }
+  )
+
   function selectMenu(val) {
     if (val.name === "home") {
       state.value.currentMenu = null;
@@ -48,7 +55,16 @@ export const useAllDataStore = defineStore("allData", () => {
     state.value.menuList = val;
   }
 
-  function addMenu(router) {
+  function addMenu(router, type) {
+    if(type === "refresh") {
+      if(JSON.parse(localStorage.getItem("store"))) {
+        state.value = JSON.parse(localStorage.getItem("store"));
+        // 
+        state.value.routerList = [];
+      } else {
+        return;
+      }
+    }
     const menu = state.value.menuList;
     const module = import.meta.glob("../views/**/*.vue");
     const routeArr = [];
@@ -65,12 +81,22 @@ export const useAllDataStore = defineStore("allData", () => {
         routeArr.push(item);
       }
     });
+    state.value.routerList = [];
+    let routers = router.getRoutes();
+    // 清除之前的路由
+    routers.forEach(item => {
+      if (item.name == "main" || item.name == "login" || item.name == "404") {
+        return;
+      } else {
+        router.removeRoute(item.name);
+      }
+    });
     routeArr.forEach((item) => {
-      state.value.routerList.push(router.addRoute("Main", item));
+      state.value.routerList.push(router.addRoute("main", item));
     });
   }
   function clean() {
-    statevalue.routerList.forEach((item) => {
+    state.value.routerList.forEach((item) => {
       if(item) item();
     });
     state.value = initState();
